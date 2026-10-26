@@ -1,0 +1,11 @@
+# Security and privacy
+
+ReplaySmith runs browser actions with the authority of whoever launches it. Review workflows from others as executable instructions before running them. The studio listens on `127.0.0.1`, rejects foreign Host/Origin values and cross-site writes, accepts JSON only, and serves a fixed list of static files. It starts a new browser context and does not read your regular browser profile, password manager, or credential stores. It has no telemetry or model API integration.
+
+Navigation is limited to explicit `allowedOrigins`; unexpected popups are closed. This is a workflow guard, **not a complete network sandbox**: page scripts and subresources may still contact other origins. Browser automation can interact with localhost/private-network sites you include. Use an isolated environment for untrusted pages or workflows.
+
+Consequential steps must be marked `sensitive: true`. Runtime word/type checks also catch some obvious destructive, payment, publishing, submission and password targets. These checks do not understand every language or business action. Explicit permission (`--allow-sensitive` or the studio checkbox) is required, and these actions use matching recorded selectors without recovery. Neither this flag nor a successful score establishes that a business action is appropriate.
+
+The recorder omits values for password fields and common secret/payment identifiers, converting them to required secret inputs. It does not recognize every private value. Imported Chrome recordings can already contain plaintext secrets: redact and parameterize them before saving or exporting. Never commit personal recordings or private run reports. Run reports may contain target names and nearby page text as recovery evidence, but do not echo filled input values or Playwright call logs. Use `--inputs-stdin` for private runtime values to avoid command-line history and process arguments. The studio keeps the current workflow in memory rather than localStorage.
+
+If you find a vulnerability, use GitHub's private vulnerability reporting if it is enabled for the repository. Otherwise open an issue containing only a non-sensitive summary and ask for a private reporting route. Never post secrets or an exploit against a live third-party account.

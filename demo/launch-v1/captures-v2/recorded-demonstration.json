@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "name": "Recorded browser task",
+  "description": "Review the steps, allowed origins and outcome checks before replay.",
+  "inputs": {},
+  "allowedOrigins": [
+    "http://127.0.0.1:59194"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "action": "navigate",
+      "url": "http://127.0.0.1:59194/demo"
+    },
+    {
+      "id": "step-2",
+      "action": "fill",
+      "target": {
+        "selectors": [
+          "#note"
+        ],
+        "evidence": {
+          "tag": "textarea",
+          "name": "Dispatch note",
+          "label": "Dispatch note",
+          "role": "textbox",
+          "context": "Dispatch desk"
+        }
+      },
+      "value": "Send the field kit to Avery."
+    },
+    {
+      "id": "step-3",
+      "action": "click",
+      "target": {
+        "selectors": [
+          "#save"
+        ],
+        "evidence": {
+          "tag": "button",
+          "name": "Save draft",
+          "text": "Save draft",
+          "role": "button",
+          "context": "Dispatch desk",
+          "type": "button"
+        }
+      }
+    },
+    {
+      "id": "step-4",
+      "action": "assert",
+      "assertion": {
+        "kind": "text",
+        "target": {
+          "selectors": [
+            "#receipt"
+          ],
+          "evidence": {
+            "tag": "output",
+            "testId": "receipt"
+          }
+        },
+        "value": "Draft saved: Send the field kit to Avery."
+      }
+    }
+  ]
+}

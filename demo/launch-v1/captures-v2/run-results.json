@@ -1,0 +1,191 @@
+{
+  "original": {
+    "workflow": "Save a dispatch note",
+    "status": "passed",
+    "verified": true,
+    "durationMs": 588,
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "navigate",
+        "status": "passed",
+        "durationMs": 44
+      },
+      {
+        "id": "step-2",
+        "action": "fill",
+        "status": "passed",
+        "durationMs": 153,
+        "strategy": "selector"
+      },
+      {
+        "id": "step-3",
+        "action": "click",
+        "status": "passed",
+        "durationMs": 254,
+        "strategy": "selector"
+      },
+      {
+        "id": "step-4",
+        "action": "assert",
+        "status": "passed",
+        "durationMs": 103,
+        "strategy": "selector"
+      }
+    ]
+  },
+  "reused-id": {
+    "workflow": "Save a dispatch note",
+    "status": "passed",
+    "verified": true,
+    "durationMs": 665,
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "navigate",
+        "status": "passed",
+        "durationMs": 16
+      },
+      {
+        "id": "step-2",
+        "action": "fill",
+        "status": "recovered",
+        "durationMs": 211,
+        "strategy": "semantic"
+      },
+      {
+        "id": "step-3",
+        "action": "click",
+        "status": "recovered",
+        "durationMs": 381,
+        "strategy": "semantic"
+      },
+      {
+        "id": "step-4",
+        "action": "assert",
+        "status": "passed",
+        "durationMs": 52,
+        "strategy": "selector"
+      }
+    ]
+  },
+  "ambiguous": {
+    "workflow": "Save a dispatch note",
+    "status": "abstained",
+    "verified": false,
+    "durationMs": 371,
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "navigate",
+        "status": "passed",
+        "durationMs": 16
+      },
+      {
+        "id": "step-2",
+        "action": "fill",
+        "status": "recovered",
+        "durationMs": 83,
+        "strategy": "semantic"
+      },
+      {
+        "id": "step-3",
+        "action": "click",
+        "status": "abstained",
+        "durationMs": 267,
+        "candidates": [
+          {
+            "index": 1,
+            "evidence": {
+              "tag": "button",
+              "role": "button",
+              "name": "Save draft",
+              "text": "Save draft",
+              "type": "button",
+              "context": "Dispatch desk"
+            },
+            "score": 1,
+            "reasons": [
+              "name: exact",
+              "text: exact",
+              "context: exact",
+              "role: exact",
+              "tag: exact",
+              "type: exact"
+            ]
+          },
+          {
+            "index": 2,
+            "evidence": {
+              "tag": "button",
+              "role": "button",
+              "name": "Save draft",
+              "text": "Save draft",
+              "type": "button",
+              "context": "Dispatch desk"
+            },
+            "score": 1,
+            "reasons": [
+              "name: exact",
+              "text: exact",
+              "context: exact",
+              "role: exact",
+              "tag: exact",
+              "type: exact"
+            ]
+          },
+          {
+            "index": 0,
+            "evidence": {
+              "tag": "textarea",
+              "role": "textbox",
+              "name": "Dispatch note",
+              "label": "Dispatch note",
+              "context": "Dispatch desk"
+            },
+            "score": 0,
+            "reasons": [
+              "role conflicts"
+            ]
+          }
+        ],
+        "message": "Recovery is ambiguous (minimum lead 0.12); no action taken."
+      }
+    ]
+  },
+  "restored": {
+    "workflow": "Save a dispatch note",
+    "status": "passed",
+    "verified": true,
+    "durationMs": 228,
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "navigate",
+        "status": "passed",
+        "durationMs": 19
+      },
+      {
+        "id": "step-2",
+        "action": "fill",
+        "status": "passed",
+        "durationMs": 100,
+        "strategy": "selector"
+      },
+      {
+        "id": "step-3",
+        "action": "click",
+        "status": "passed",
+        "durationMs": 41,
+        "strategy": "selector"
+      },
+      {
+        "id": "step-4",
+        "action": "assert",
+        "status": "passed",
+        "durationMs": 65,
+        "strategy": "selector"
+      }
+    ]
+  }
+}

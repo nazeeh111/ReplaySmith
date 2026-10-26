@@ -1,0 +1,62 @@
+{
+  "video": {
+    "path": "assets/demo.mp4",
+    "durationSeconds": 22,
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "audioStreams": 0,
+    "fullDecode": "passed"
+  },
+  "gif": {
+    "path": "assets/demo.gif",
+    "durationSeconds": 21.2,
+    "width": 900,
+    "height": 506,
+    "fps": 10,
+    "startupTrimSeconds": 0.8,
+    "fullDecode": "passed"
+  },
+  "renderer": {
+    "version": "0.8.33",
+    "workers": 1,
+    "quality": "standard",
+    "lint": true,
+    "runtime": true,
+    "layoutSamples": 9,
+    "contrastSamples": 5,
+    "motionModuleEnabled": false
+  },
+  "visualReview": {
+    "settledFramesSeconds": [
+      1.4,
+      5,
+      8.8,
+      12.5,
+      16.4,
+      20.8
+    ],
+    "transitionFramesSeconds": [
+      3.2,
+      7.2,
+      10.8,
+      14.7,
+      18.4
+    ],
+    "notes": "Horizontal push transitions intentionally move outgoing content beyond the canvas. No unintended clipping or missing media observed in reviewed output."
+  },
+  "sha256": {
+    "assets/demo.mp4": "bc8e7ba7caa0303573e22ead8d17ab706103e643d14bdb5477ac0a29281d01ec",
+    "assets/demo.gif": "b864ce37dc0711e6271e046cb2daec746444d576185bc42f795a24f123140614",
+    "assets/demo-poster.png": "093c34d0d336dbf63be6cc46260fed7290d9107eceb5145e99f8500aff60704b",
+    "demo/launch-v1/composition/index.html": "874a713a998f337d85e10393301c112bb57157c837c97f2fa527d29354567985",
+    "scripts/capture-demo.ts": "1ee37377159e56f581eb6ebce16b133e744f83862071b58fc3e72cff0205c7b0"
+  },
+  "sizeBytes": {
+    "assets/demo.mp4": 2518563,
+    "assets/demo.gif": 2372283,
+    "assets/demo-poster.png": 322461,
+    "demo/launch-v1/composition/index.html": 12354,
+    "scripts/capture-demo.ts": 9709
+  }
+}

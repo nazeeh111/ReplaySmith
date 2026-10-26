@@ -1,0 +1,6766 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-26T23:08:20.813Z",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "browser": "156.0.8078.4"
+  },
+  "artifactHashes": {
+    "dist/runner.js": "2eccd7c99be01b1e1dd9f9f2c14f563a8a4765a31fec969353163fda95057778",
+    "dist/recovery.js": "00e1899dc67b41cf56360a93c4113712465a057b2b4ef7f1e20a5abcb59d2aae",
+    "dist/demo.js": "21a8244995e26a01ac5c9f5a4d46d49fd0c493eef1348ff56c76401a243f1aef",
+    "benchmarks/run.ts": "aa8678ff9b96a7127497d45c145965ab21b98fbd304dd527e62f517b1dbd7a34",
+    "package-lock.json": "991e150dfa0cf4e8f4e63e0d83b131c9e4f6f52f12b7a0c90a93ada13a2ad2cd"
+  },
+  "iterations": 3,
+  "operationTimeoutMs": 900,
+  "scope": "Controlled local dispatch-note fixtures; no real-world reliability claim; no trained model; no held-out evaluation claim.",
+  "summaries": [
+    {
+      "policy": "selector",
+      "trials": 33,
+      "completed": 3,
+      "verifiedCompleted": 3,
+      "incorrectActionTrials": 3,
+      "incorrectActions": 3,
+      "safeAbstentions": 0,
+      "safeStops": 12,
+      "refusalTrials": 12,
+      "recoverableCompleted": 0,
+      "recoverableTrials": 15,
+      "originalMedianMs": 394.2,
+      "completedMedianMs": 394.2,
+      "allMedianMs": 959.9
+    },
+    {
+      "policy": "semantic",
+      "trials": 33,
+      "completed": 15,
+      "verifiedCompleted": 15,
+      "incorrectActionTrials": 0,
+      "incorrectActions": 0,
+      "safeAbstentions": 0,
+      "safeStops": 12,
+      "refusalTrials": 12,
+      "recoverableCompleted": 12,
+      "recoverableTrials": 15,
+      "originalMedianMs": 101.1,
+      "completedMedianMs": 152.8,
+      "allMedianMs": 597.1
+    },
+    {
+      "policy": "heuristic",
+      "trials": 33,
+      "completed": 18,
+      "verifiedCompleted": 18,
+      "incorrectActionTrials": 6,
+      "incorrectActions": 6,
+      "safeAbstentions": 0,
+      "safeStops": 6,
+      "refusalTrials": 12,
+      "recoverableCompleted": 12,
+      "recoverableTrials": 15,
+      "originalMedianMs": 297.7,
+      "completedMedianMs": 304.8,
+      "allMedianMs": 519.6
+    },
+    {
+      "policy": "recovery",
+      "trials": 33,
+      "completed": 18,
+      "verifiedCompleted": 18,
+      "incorrectActionTrials": 0,
+      "incorrectActions": 0,
+      "safeAbstentions": 12,
+      "safeStops": 12,
+      "refusalTrials": 12,
+      "recoverableCompleted": 15,
+      "recoverableTrials": 15,
+      "originalMedianMs": 644.3,
+      "completedMedianMs": 586.2,
+      "allMedianMs": 644.3
+    }
+  ],
+  "trials": [
+    {
+      "policy": "selector",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 681.7,
+      "state": {
+        "saved": "Benchmark note 1: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 681.4204589999999,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 33.413792000000285
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 44.073875000000044
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 547.3988750000008
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 56.4437080000007
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 362.9,
+      "state": {
+        "saved": "Benchmark note 1: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 362.9169579999998,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 44.78120800000033
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 180.6787919999988
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 28.863750000000437
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 108.56279199999881
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 472.8,
+      "state": {
+        "saved": "Benchmark note 1: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 472.73662499999955,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 72.26624999999876
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 81.32291600000099
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 238.2469999999994
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 80.86070800000016
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1657.2,
+      "state": {
+        "saved": "Benchmark note 1: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1655,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 409
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 402,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 463,
+            "strategy": "selector"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 354,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1148.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1148.142667,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 241.46829099999923
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "failed",
+            "durationMs": 906.6512079999993,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 218.6,
+      "state": {
+        "saved": "Benchmark note 1: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 218.56687500000044,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 18.544042000001355
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 35.06316599999991
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 39.32037499999933
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 125.60224999999991
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 510.1,
+      "state": {
+        "saved": "Benchmark note 1: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 510.07620900000074,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.87104199999885
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 276.131374999999
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 210.33787499999926
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 6.614250000000538
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1438.8,
+      "state": {
+        "saved": "Benchmark note 1: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1438,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 20
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "recovered",
+            "durationMs": 693,
+            "strategy": "semantic"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 594,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 98,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1129.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1129.6321669999998,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 141.7569160000021
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 35.89216600000145
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 951.9402499999997,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 595.1,
+      "state": {
+        "saved": "Benchmark note 1: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 595.0985000000001,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 27.834209000000556
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 190.8279169999987
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 63.94854199999827
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 312.4511249999996
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 430.5,
+      "state": {
+        "saved": "Benchmark note 1: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 430.44474999999875,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 26.11345799999981
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 173.833499999997
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 218.24758400000064
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 12.206958999999188
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1031.3,
+      "state": {
+        "saved": "Benchmark note 1: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1028,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 88
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 249,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 52,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 582,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 949.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 949.7840829999986,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.767499999998108
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 35.24633299999914
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.7467920000017,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1005.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1005.9258330000011,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.808375000000524
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 92.71099999999933
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 903.393333,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 218.9,
+      "state": {
+        "saved": "Benchmark note 1: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 218.87625000000116,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14.230874999997468
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 35.578958000001876
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 156.81266700000197
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 12.236542000002373
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 654.5,
+      "state": {
+        "saved": "Benchmark note 1: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 654,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 50
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 119,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 395,
+            "strategy": "recovery",
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft now",
+                  "text": "Save draft now",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.8,
+                "reasons": [
+                  "name: 67% token overlap",
+                  "text: 67% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 87,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1004.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1004.7467499999984,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.432667000000947
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 35.71437499999956
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 41.367582999999286
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 914.2071250000008,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 133.1,
+      "state": {
+        "saved": "Benchmark note 1: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 133.0915419999983,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.81970899999942
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.18212499999936
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 29.918832999999722
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 65.15204199999789
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 1106.3,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1106.3163750000022,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.450667000000976
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 31.43145800000275
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 153.25820899999962
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 912.148874999999,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 474.8,
+      "state": {
+        "saved": "Benchmark note 1: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 474,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 142
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 210,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 44,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 75,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 979.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 979.2389170000024,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.339042000003246
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 63.11650000000009
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 903.7658749999973,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 643.3,
+      "state": {
+        "saved": "Benchmark note 1: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 643.2715419999986,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.00445899999977
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 32.08666600000288
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 546.3422500000015
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 52.76816699999836
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 516.1,
+      "state": {
+        "saved": "Benchmark note 1: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 516.0442919999987,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 26.125875000001543
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 48.08116700000028
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 430.619999999999
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 11.193250000000262
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 1,
+      "durationMs": 640,
+      "state": {
+        "saved": "Benchmark note 1: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 640,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 60,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 510,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 54,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 1082,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1081.9731669999965,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 77.32541599999968
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 97.91112499999872
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 906.6982500000013,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 960.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 960.0680420000062,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 30.304250000001048
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.57591699999466
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 903.166916000002,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 354.9,
+      "state": {
+        "saved": "Benchmark note 1: renamed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 354.86445800000365,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 23.194916000000376
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 173.4435419999936
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 78.61129200000141
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 79.58674999999494
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 1558.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 1558,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 48
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 316,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 1125,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Store draft",
+                  "text": "Store draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.6,
+                "reasons": [
+                  "name: 33% token overlap",
+                  "text: 33% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 955.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 955.1059999999998,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 27.20387500000652
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.486999999993714
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.0760000000009,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 177.4,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 177.39529200000106,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.88787500000035
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 148.60283399999753
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 11.890708999999333,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 1037.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1037.510083000001,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.75370899999689
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 34.44916699999885
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 77.4232090000005
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 908.8587909999987,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 525.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 525,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 51
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 338,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 133,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 2,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Recovery is ambiguous (minimum lead 0.12); no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 987.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 987.0517920000057,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.390625
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 73.52483299999585
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 902.1185410000035,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 962.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 962.7425839999996,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.631625000001804
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 32.24449999999342
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 917.8471659999996,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 957.3,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 957.3205000000016,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.240375000001222
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 36.7209589999984
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 910.338582999997,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 1597.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 1598,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 42
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 622,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 913,
+            "candidates": [
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 967.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 967.5497920000053,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.878750000003492
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 40.70295800000167
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 909.9275419999976,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 946.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 946.8187080000062,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14.857791999995243
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.926583999993454
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 903.0090419999979,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 946.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 946.5008330000055,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.806707999996434
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.705708000001323
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 907.9641249999986,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 1,
+      "durationMs": 131,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 130,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 88,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 26,
+            "strategy": "semantic",
+            "message": "Target is disabled or not editable; no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 1,
+      "durationMs": 955.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 955.5842089999933,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 29.59508300000016
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 24.66129099999671
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.3099999999977,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 1,
+      "durationMs": 1011.2,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1011.161666,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.799249999996391
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 36.14216699999815
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 35.9632500000007
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 925.2307500000024,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 1,
+      "durationMs": 998.2,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 998.1742089999971,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.552708000002895
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.241833000000042
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 47.46283300000505
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 913.9012499999953,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 1,
+      "durationMs": 1863.6,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1863,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 32
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 227,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 379,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 1213,
+            "strategy": "selector",
+            "message": "Outcome assertion did not match within the timeout."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 69.7,
+      "state": {
+        "saved": "Benchmark note 2: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 69.73741699999664,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.668000000005122
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.927292000000307
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 27.084500000004482
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.032166999997571
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 297.7,
+      "state": {
+        "saved": "Benchmark note 2: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 297.6571250000052,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 79.30512499999895
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 44.29374999999709
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 40.271749999999884
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 133.7641250000015
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 644.3,
+      "state": {
+        "saved": "Benchmark note 2: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 641,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 43
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 212,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 56,
+            "strategy": "selector"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 318,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 394.2,
+      "state": {
+        "saved": "Benchmark note 2: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 394.2382090000028,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 73.89258300000074
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 226.223542000007
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 88.81374999999389
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.284708999999566
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 357.4,
+      "state": {
+        "saved": "Benchmark note 2: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 357.361625000005,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.455542000003334
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.037250000001222
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 312.000082999999
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.850916000003053
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 311.9,
+      "state": {
+        "saved": "Benchmark note 2: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 311.9395000000004,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.822999999996682
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 72.54641599999741
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 176.63341699999728
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 50.916582999998354
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 375.7,
+      "state": {
+        "saved": "Benchmark note 2: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 376,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "recovered",
+            "durationMs": 62,
+            "strategy": "semantic"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 217,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 80,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 923.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 923.484749999996,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 20.264000000002852
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "failed",
+            "durationMs": 903.2073750000054,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 119.6,
+      "state": {
+        "saved": "Benchmark note 2: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 119.62333300000319,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 22.827291999994486
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 45.25345799999923
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 45.29437499999767
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 6.222625000002154
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 177.9,
+      "state": {
+        "saved": "Benchmark note 2: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 177.90620900000067,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.384124999996857
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 41.422958000002836
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 105.55774999999994
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 20.518707999995968
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 716.4,
+      "state": {
+        "saved": "Benchmark note 2: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 716,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 57
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 369,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 133,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 75,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 958.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 958.1426670000001,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 20.821332999999868
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 34.50145799999882
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 902.8001670000012,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 985.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 985.8847909999968,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 40.61345799999981
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 43.03270799999882
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 902.2211669999961,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 87.1,
+      "state": {
+        "saved": "Benchmark note 2: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 87.06974999999511,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.555083999999624
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 29.615375000001222
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 42.58954199999425
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.279125000000931
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 501,
+      "state": {
+        "saved": "Benchmark note 2: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 501,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 99,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 177,
+            "strategy": "recovery",
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft now",
+                  "text": "Save draft now",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.8,
+                "reasons": [
+                  "name: 67% token overlap",
+                  "text: 67% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 209,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 942.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 942.5161250000019,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 15.98487500000192
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 24.468041000000085
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 902.0427500000078,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 152.8,
+      "state": {
+        "saved": "Benchmark note 2: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 152.84116700000595,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.87804199999664
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 30.242249999995693
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 102.12320799998997
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 9.568834000005154
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 1004,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1004.0428329999995,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 18.96912500000326
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 34.006750000000466
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 46.13224999999511
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 904.9175410000025,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 264.8,
+      "state": {
+        "saved": "Benchmark note 2: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 265,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 21
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 56,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 99,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 79,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 993.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 993.9367920000077,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 33.886333000002196
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.709791999994195
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 31.52912500000093
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 901.775833000007,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 597.1,
+      "state": {
+        "saved": "Benchmark note 2: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 597.0877080000064,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.052041000002646
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.32675000000745
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 549.3240420000075
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.361457999999402
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 519.6,
+      "state": {
+        "saved": "Benchmark note 2: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 519.5774999999994,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.468833999999333
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.264125000001513
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 471.38370900000155
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.441792000012356
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 664,
+      "state": {
+        "saved": "Benchmark note 2: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 664,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 69,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 487,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 88,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 2,
+      "durationMs": 1218.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1218.3115830000024,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 36.10787500000151
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 158.46862499999406
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 1023.7165829999867,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1654.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1654.8076250000013,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 113.31637499999488
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 430.5509170000005
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 1110.9155000000028,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 587.3,
+      "state": {
+        "saved": "Benchmark note 2: renamed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 587.3384580000129,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 58.90641699999105
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 75.42195799999172
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 415.25675000000047
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 37.733666000000085
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1112.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 1110,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 84
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 53,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 951,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Store draft",
+                  "text": "Store draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.6,
+                "reasons": [
+                  "name: 33% token overlap",
+                  "text: 33% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 963.4,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 963.4219589999993,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 21.34274999999616
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 40.85512500000186
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.2072500000068,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 73.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 73.83729199999652,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 27.208250000010594
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 37.721624999991036
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 8.89337499999965,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1008.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1008.1200830000016,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.86408400000073
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.98758300000918
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 42.24045800000022
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 922.9915409999958,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 508.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 507,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 106,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 376,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 2,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Recovery is ambiguous (minimum lead 0.12); no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1040.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1040.9249580000032,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 32.5082090000069
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 68.82958299999882
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 939.5475829999923,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 966.7,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 966.6886660000018,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 35.196083000002545
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 25.880833999995957
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 905.5898339999985,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1031.3,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1031.2480000000069,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 15.756666999994195
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.680999999996857
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 987.7863750000106,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1459.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 1457,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 23
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 269,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 1154,
+            "candidates": [
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 983,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 982.9853750000038,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.471707999997307
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 60.37787500000559
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 906.0425829999876,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 975.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 975.7797500000015,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 17.763000000006286
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 55.22362499999872
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 902.7651249999908,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1121.7,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1121.6621250000026,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 23.142917000004672
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 116.57358399999794
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 981.9247909999976,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 326.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 326,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 19
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 261,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 43,
+            "strategy": "semantic",
+            "message": "Target is disabled or not editable; no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 2,
+      "durationMs": 1000.3,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1000.2522920000047,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 53.24816699999792
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 40.23620799998753
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 906.7444169999944,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 2,
+      "durationMs": 1424.2,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1424.1567920000089,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14.234041000003344
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 50.731082999991486
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 296.92112500000803
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 1062.246374999988,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 2,
+      "durationMs": 1278.9,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1278.8384579999984,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 25.672709000005852
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 76.60570899999584
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 252.54262500000186
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 923.9738329999964,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 2,
+      "durationMs": 1817,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1817,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 245
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 213,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 358,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 994,
+            "strategy": "selector",
+            "message": "Outcome assertion did not match within the timeout."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 2,
+      "durationMs": 944.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 944.8926249999931,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16.703874999991967
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.35662500000035
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 899.8098330000066,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 107.5,
+      "state": {
+        "saved": "Benchmark note 3: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 107.50074999999197,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.420000000012806
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 42.5379580000008
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 45.612833999999566
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.907500000001164
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 298.5,
+      "state": {
+        "saved": "Benchmark note 3: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 299,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 24
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 53,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 101,
+            "strategy": "selector"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 101,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 128.4,
+      "state": {
+        "saved": "Benchmark note 3: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 128.42174999999406,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 20.712708000006387
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.956583999999566
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 32.31029199999466
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 47.42025000001013
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "original",
+      "group": "control",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 101.1,
+      "state": {
+        "saved": "Benchmark note 3: original",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 101.0568329999951,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.03750000000582
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 54.07562499999767
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 33.54558299999917
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 4.379958999998053
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 154,
+      "state": {
+        "saved": "Benchmark note 3: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 154.0119160000031,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 23.985040999992634
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 76.13074999999662
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 48.55516699999862
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.172083999990718
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 532.3,
+      "state": {
+        "saved": "Benchmark note 3: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 532,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 32
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "recovered",
+            "durationMs": 220,
+            "strategy": "semantic"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 218,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 59,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 959.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 959.9067919999943,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 55.770292000001064
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "failed",
+            "durationMs": 904.122125000009,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "id-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 89.7,
+      "state": {
+        "saved": "Benchmark note 3: id-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 89.69079200000851,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 17.544916999991983
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 24.87591600000451
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 40.19445799999812
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 7.010000000009313
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 218.8,
+      "state": {
+        "saved": "Benchmark note 3: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 218.74758400001156,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.06112500000745
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.810624999998254
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 47.48995799999102
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 129.3576250000042
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 213.1,
+      "state": {
+        "saved": "Benchmark note 3: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 213,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 15
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 59,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 44,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 66,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 952.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 952.2437499999942,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 17.507417000000714
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 33.26799999999639
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.4485420000128,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrapper-drift",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 116.6,
+      "state": {
+        "saved": "Benchmark note 3: wrapper-drift",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 116.6112090000097,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.626583000004757
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.930666999993264
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 30.425875000000815
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 47.60783300000185
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 87.4,
+      "state": {
+        "saved": "Benchmark note 3: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 87.3758749999979,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.063457999989623
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 32.91529200000514
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 39.69716700000572
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.682209000005969
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 331.7,
+      "state": {
+        "saved": "Benchmark note 3: wording-extension",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 331,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 18
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 64,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 74,
+            "strategy": "recovery",
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft now",
+                  "text": "Save draft now",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.8,
+                "reasons": [
+                  "name: 67% token overlap",
+                  "text: 67% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 170,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 980,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 979.9789999999921,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 48.25920900001074
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 32.41133400000399
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 899.2923330000049,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wording-extension",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 940.3,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 940.3142499999958,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.255959000001894
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.38566699999501
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.654165999993,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 1014.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1014.0579160000052,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 17.04558299999917
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 25.30275000000256
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 40.970707999993465
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 930.7207920000073,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 209.7,
+      "state": {
+        "saved": "Benchmark note 3: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 209,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 19
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 66,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 54,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 66,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 1007,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1006.9395420000073,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.6373339999991
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 48.10641599999508
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 40.436625000002095
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 908.7304160000058,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "reused-id",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 88.5,
+      "state": {
+        "saved": "Benchmark note 3: reused-id",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 88.48024999999325,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.275207999991835
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 30.903458999993745
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 40.97866599999543
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 4.305625000008149
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 507.3,
+      "state": {
+        "saved": "Benchmark note 3: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 507.25049999999464,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 12.648790999999619
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 30.56212499999674
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 458.8325000000041
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.176875000004657
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 671.4,
+      "state": {
+        "saved": "Benchmark note 3: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 671,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 21
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 59,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 473,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 111,
+            "strategy": "selector"
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 983.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 983.7487919999985,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 18.529374999998254
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 64.12774999999965
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.0750830000034,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "delayed",
+      "group": "recoverable",
+      "expectation": "complete",
+      "iteration": 3,
+      "durationMs": 554.6,
+      "state": {
+        "saved": "Benchmark note 3: delayed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 554.5733750000072,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.665041999993264
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 25.237458000003244
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 512.5507079999952
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 6.100124999997206
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 123.7,
+      "state": {
+        "saved": "Benchmark note 3: renamed",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": true,
+      "verifiedCompletion": true,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "passed",
+        "verified": true,
+        "durationMs": 123.65983299999789,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.73391699999047
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 44.49216599999636
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 61.88199999999779
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "passed",
+            "durationMs": 5.531375000005937
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 1042.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 1040,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 26
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 60,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 927,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Store draft",
+                  "text": "Store draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 0.6,
+                "reasons": [
+                  "name: 33% token overlap",
+                  "text: 33% token overlap",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 950.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 950.1165000000037,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 22.329834000003757
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.47179199999664
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 901.2997500000056,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "renamed",
+      "group": "unsupported-meaning",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 943.1,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 943.0494169999874,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.41241699999955
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.947792000006302
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.6713750000054,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 1032.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 1,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1032.2397499999934,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 13.61433300000499
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 37.393499999991036
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 50.450792000003275
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 930.7565000000031,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 119.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 119,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 16
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 60,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 41,
+            "candidates": [
+              {
+                "index": 1,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 2,
+                "evidence": {
+                  "tag": "button",
+                  "role": "button",
+                  "name": "Save draft",
+                  "text": "Save draft",
+                  "type": "button",
+                  "context": "Dispatch desk"
+                },
+                "score": 1,
+                "reasons": [
+                  "name: exact",
+                  "text: exact",
+                  "context: exact",
+                  "role: exact",
+                  "tag: exact",
+                  "type: exact"
+                ]
+              },
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Recovery is ambiguous (minimum lead 0.12); no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 940.7,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 940.7389580000017,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.33162500000617
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 26.256792000000132
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 903.1309590000019,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "ambiguous",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 47.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 47.86845799999719,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.630417000007583
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 27.50470900000073
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 10.705832999999984,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 945.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 945.6034170000057,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.397834000003058
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 29.11633299999812
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 905.067750000002,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 984.2,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 984,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 14
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 51,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 917,
+            "candidates": [
+              {
+                "index": 0,
+                "evidence": {
+                  "tag": "textarea",
+                  "role": "textbox",
+                  "name": "Dispatch note",
+                  "label": "Dispatch note",
+                  "context": "Dispatch desk"
+                },
+                "score": 0,
+                "reasons": [
+                  "role conflicts"
+                ]
+              }
+            ],
+            "message": "Insufficient evidence for recovery (minimum score 0.78)."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 934.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 934.8215840000048,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 8.796332999991137
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 25.034041999999317
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.968417000011,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "missing",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 941.9,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 941.8510829999868,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.40204200000153
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 30.443708000006154
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.9864999999991,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 946.7,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 946.6619170000049,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.09687500000291
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.986707999996725
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 907.5621249999967,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 86.8,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": true,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "abstained",
+        "verified": false,
+        "durationMs": 87,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 51,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "abstained",
+            "durationMs": 23,
+            "strategy": "semantic",
+            "message": "Target is disabled or not editable; no action taken."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 933,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 932.9460839999956,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11.134958999988157
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 21.54108300000371
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.2485420000012,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "disabled",
+      "group": "unsafe-target",
+      "expectation": "abstain",
+      "iteration": 3,
+      "durationMs": 938.5,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 938.4674169999926,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 15.402874999999767
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 22.508333999998285
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 900.5406660000008,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "heuristic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 3,
+      "durationMs": 1030.9,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1030.8400419999962,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 9.669250000006286
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.489667000001646
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 41.7913750000007
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 950.869000000006,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "recovery",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 3,
+      "durationMs": 1046.1,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 1046,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 11
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 55,
+            "strategy": "selector"
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "recovered",
+            "durationMs": 49,
+            "strategy": "semantic"
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 928,
+            "strategy": "selector",
+            "message": "Outcome assertion did not match within the timeout."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "selector",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 3,
+      "durationMs": 944.6,
+      "state": {
+        "saved": null,
+        "wrongActions": 0,
+        "saveCount": 0
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": true,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 944.6426659999997,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 10.303667000000132
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 28.20691700000316
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "failed",
+            "durationMs": 905.593709000008,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    },
+    {
+      "policy": "semantic",
+      "variant": "wrong-outcome",
+      "group": "outcome-failure",
+      "expectation": "fail",
+      "iteration": 3,
+      "durationMs": 987.2,
+      "state": {
+        "saved": "corrupted",
+        "wrongActions": 0,
+        "saveCount": 1
+      },
+      "taskCompleted": false,
+      "verifiedCompletion": false,
+      "safeStop": false,
+      "safeAbstention": false,
+      "result": {
+        "workflow": "Save a dispatch note",
+        "status": "failed",
+        "verified": false,
+        "durationMs": 987.1458750000165,
+        "steps": [
+          {
+            "id": "open",
+            "action": "navigate",
+            "status": "passed",
+            "durationMs": 15.797334000002593
+          },
+          {
+            "id": "note",
+            "action": "fill",
+            "status": "passed",
+            "durationMs": 21.753667000011774
+          },
+          {
+            "id": "save",
+            "action": "click",
+            "status": "passed",
+            "durationMs": 27.760041999979876
+          },
+          {
+            "id": "verify",
+            "action": "assert",
+            "status": "failed",
+            "durationMs": 921.8127909999748,
+            "message": "Baseline target or outcome did not resolve within the operation budget."
+          }
+        ]
+      }
+    }
+  ]
+}

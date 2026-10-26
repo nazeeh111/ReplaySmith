@@ -1,0 +1,2 @@
+# Keep the vendored demo runtime byte-for-byte with its original license header.
+demo/launch-v1/composition/assets/gsap.min.js -whitespace

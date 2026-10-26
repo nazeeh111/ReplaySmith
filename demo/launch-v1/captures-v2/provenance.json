@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-10-26T23:04:22.947Z",
+  "source": "scripts/capture-demo.ts",
+  "method": "Real recorder demonstration, imported through the local studio UI; real Playwright runner, no mocked responses",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844
+  },
+  "mobileOverflow": false,
+  "pageErrors": [],
+  "notes": "All text/data are fictional local fixture values. Browser timings are observed values, not benchmark claims."
+}

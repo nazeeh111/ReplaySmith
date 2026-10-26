@@ -1,0 +1,19 @@
+name: Report a reproducible problem
+description: Share a small recording and the outcome you expected.
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include ReplaySmith and Node versions, operating system, the failing step, and expected outcome.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Minimal reproduction
+      description: A public test page or small HTML fixture and redacted workflow JSON. Remove credentials, personal information, cookies, and private URLs.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Run report
+      description: Include the step status and recovery evidence. Redact private page text and identifiers.

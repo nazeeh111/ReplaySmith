@@ -1,0 +1,42 @@
+{
+  "title": "Dispatch note from Recorder",
+  "steps": [
+    {
+      "type": "setViewport",
+      "width": 1280,
+      "height": 720,
+      "deviceScaleFactor": 1,
+      "isMobile": false,
+      "hasTouch": false,
+      "isLandscape": true
+    },
+    {
+      "type": "navigate",
+      "url": "http://127.0.0.1:3333/demo"
+    },
+    {
+      "type": "change",
+      "selectors": [
+        [
+          "#note"
+        ],
+        [
+          "aria/Dispatch note[role=\"textbox\"]"
+        ]
+      ],
+      "value": "Send the field kit to Avery."
+    },
+    {
+      "type": "click",
+      "selectors": [
+        [
+          "#save"
+        ],
+        [
+          "aria/Save draft[role=\"button\"]"
+        ]
+      ],
+      "button": "primary"
+    }
+  ]
+}

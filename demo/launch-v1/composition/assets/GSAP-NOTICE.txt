@@ -1,0 +1,7 @@
+GSAP 3.14.2
+Copyright 2025, GreenSock. All rights reserved.
+Author: Jack Doyle
+Source: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+License: GSAP Standard no-charge license, https://gsap.com/standard-license/
+The original license notice remains intact in gsap.min.js.
+This file is used only to animate the editable launch composition, not by ReplaySmith's runtime.

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520" role="img" aria-labelledby="title desc">
+<title id="title">ReplaySmith: one workflow, one runtime</title><desc id="desc">Browser recording and Chrome Recorder import become a validated JSON workflow with inputs and outcome checks. CLI and Studio execute it through guards, exact locators and ranked recovery. Ambiguity stops the run. Outcome assertions determine verification. The same runtime is embedded into Playwright and Agent Skill exports.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#8b947c"/></marker><style>text{font-family:Arial,sans-serif;fill:#292e26}.small{font-size:13px;fill:#64705c}.label{font-size:17px;font-weight:600}.node{fill:#fffef8;stroke:#cbd1bf;stroke-width:1.3}.edge{fill:none;stroke:#8b947c;stroke-width:1.5;marker-end:url(#arrow)}</style></defs>
+<rect width="1120" height="520" rx="16" fill="#f5f4ee"/>
+<text x="40" y="42" font-size="12" letter-spacing="2" fill="#e64f2c">REPLAYSMITH / ARCHITECTURE</text><text x="40" y="78" font-size="28" font-weight="700">One workflow. One runtime.</text>
+<g id="inputs"><rect class="node" x="40" y="122" width="210" height="76" rx="8"/><text class="label" x="58" y="152">Record / import</text><text class="small" x="58" y="178">Browser or Recorder JSON</text></g>
+<g id="workflow"><rect class="node" x="302" y="122" width="230" height="76" rx="8"/><text class="label" x="320" y="152">Validated workflow</text><text class="small" x="320" y="178">Inputs · evidence · outcomes</text></g>
+<g id="interfaces"><rect class="node" x="584" y="122" width="205" height="76" rx="8"/><text class="label" x="602" y="152">CLI / local studio</text><text class="small" x="602" y="178">Inspect · edit · run · export</text></g>
+<g id="exports"><rect class="node" x="841" y="122" width="239" height="76" rx="8"/><text class="label" x="859" y="152">Portable exports</text><text class="small" x="859" y="178">Playwright / Agent Skills</text></g>
+<path class="edge" d="M250 160h50"/><path class="edge" d="M532 160h50"/><path class="edge" d="M789 160h50"/>
+<rect x="40" y="242" width="1040" height="222" rx="10" fill="#edf0e4" stroke="#cbd1bf"/>
+<text x="60" y="272" font-size="12" letter-spacing="1.5">SHARED DETERMINISTIC PLAYWRIGHT RUNTIME</text>
+<g id="guards"><rect class="node" x="60" y="296" width="195" height="74" rx="7"/><text class="label" x="77" y="325">Check authority</text><text class="small" x="77" y="350">Origins · sensitive steps</text></g>
+<g id="resolve"><rect class="node" x="290" y="296" width="210" height="74" rx="7"/><text class="label" x="307" y="325">Resolve the target</text><text class="small" x="307" y="350">Selector → semantic → rank</text></g>
+<g id="action"><rect class="node" x="535" y="296" width="170" height="74" rx="7"/><text class="label" x="552" y="325">Act once</text><text class="small" x="552" y="350">No blind action retry</text></g>
+<g id="verify"><rect class="node" x="740" y="296" width="320" height="74" rx="7"/><text class="label" x="757" y="325">Verify the intended outcome</text><text class="small" x="757" y="350">Trailing assertions + per-step report</text></g>
+<path class="edge" d="M255 333h33"/><path class="edge" d="M500 333h33"/><path class="edge" d="M705 333h33"/>
+<path class="edge" d="M686 198v27H157v69"/><path class="edge" d="M960 198v42"/>
+<path class="edge" d="M395 370v32h42"/><rect x="439" y="384" width="280" height="43" rx="6" fill="#fff3e9" stroke="#d8b29a"/><text x="455" y="410" font-size="14" fill="#a34228">Uncertain or ambiguous → abstain</text>
+<text class="small" x="60" y="445">No model required. Scores explain evidence; they are not probabilities.</text>
+<text class="small" x="40" y="495">Editable SVG · implementation in src/ · supported boundaries in docs/core-notes.md</text>
+</svg>

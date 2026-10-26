@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "name": "Save a dispatch note",
+  "description": "Review the steps, allowed origins and outcome checks before replay.",
+  "inputs": {
+    "dispatch_note": {
+      "default": "Send the field kit to Avery."
+    }
+  },
+  "allowedOrigins": [
+    "http://127.0.0.1:59194"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "action": "navigate",
+      "url": "http://127.0.0.1:59194/demo",
+      "description": "Open the dispatch desk"
+    },
+    {
+      "id": "step-2",
+      "action": "fill",
+      "target": {
+        "selectors": [
+          "#note"
+        ],
+        "evidence": {
+          "tag": "textarea",
+          "name": "Dispatch note",
+          "label": "Dispatch note",
+          "role": "textbox",
+          "context": "Dispatch desk"
+        }
+      },
+      "value": "{{dispatch_note}}",
+      "description": "Write the dispatch note"
+    },
+    {
+      "id": "step-3",
+      "action": "click",
+      "target": {
+        "selectors": [
+          "#save"
+        ],
+        "evidence": {
+          "tag": "button",
+          "name": "Save draft",
+          "text": "Save draft",
+          "role": "button",
+          "context": "Dispatch desk",
+          "type": "button"
+        }
+      },
+      "description": "Save the draft"
+    },
+    {
+      "id": "step-4",
+      "action": "assert",
+      "assertion": {
+        "kind": "text",
+        "target": {
+          "selectors": [
+            "#receipt"
+          ],
+          "evidence": {
+            "tag": "output",
+            "testId": "receipt"
+          }
+        },
+        "value": "Draft saved: {{dispatch_note}}"
+      },
+      "description": "Verify the saved note"
+    }
+  ]
+}

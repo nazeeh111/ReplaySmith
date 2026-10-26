@@ -1,0 +1,60 @@
+{
+  "name": "replaysmith",
+  "version": "0.1.0",
+  "description": "Show it once. Run it reliably. Local browser workflows with evidence-backed recovery and verified outcomes.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Nazeeh (nazeeh111)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazeeh111/ReplaySmith.git"
+  },
+  "homepage": "https://github.com/nazeeh111/ReplaySmith#readme",
+  "bugs": {
+    "url": "https://github.com/nazeeh111/ReplaySmith/issues"
+  },
+  "keywords": [
+    "playwright",
+    "browser-automation",
+    "agent-skills",
+    "workflow-automation",
+    "recorder",
+    "replay"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "replaysmith": "dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types.js"
+  },
+  "files": [
+    "dist",
+    "studio",
+    "examples",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test --import tsx tests/*.test.ts",
+    "bench": "npm run build && tsx benchmarks/run.ts",
+    "studio": "npm run build && node dist/cli.js studio",
+    "demo": "npm run build && tsx scripts/capture-demo.ts",
+    "check": "tsc --noEmit",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "types": "./dist/index.d.ts"
+}

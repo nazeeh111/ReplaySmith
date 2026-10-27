@@ -62,9 +62,3 @@ No competitor implementation was copied during this review. Playwright is the in
 | Skyvern | [AGPL-3.0](https://github.com/skyvern-ai/skyvern) |
 
 Schema interoperability and using a dependency do not imply importing a competitor's implementation. Any later copied source or asset needs its own provenance and license review.
-
-## Presentation tools
-
-[PaperVizAgent](https://github.com/google-research/papervizagent), formerly PaperBanana, is available under Apache-2.0. Its documented setup configures external model API keys. No free end-to-end model route was verified in this review. Executing it would add unneeded provider setup for a small architecture diagram, so a source-controlled SVG or Mermaid diagram is the proportionate route under the project's no-billed-API constraint. This is a tool-selection decision, not a claim that the project cannot support other backends.
-
-The local `/brag` skill is installed and supports a product launch clip through local Hyperframes or an existing free native fallback. The demo should use fresh screenshots or captures of the running product, readable holds, and only verified claims. A polished animation cannot substitute for an actual successful workflow run.

@@ -51,4 +51,4 @@ The final local lint, runtime, nine-sample layout, and five-sample contrast chec
 
 ## Licenses
 
-Screenshots, composition code and ReplaySmith branding are part of this MIT-licensed project. The demo-only vendored GSAP 3.14.2 runtime retains its original notice and its separate Standard no-charge license, reproduced in `composition/assets/GSAP-LICENSE.txt`. It is not a dependency of the browser automation runtime.
+Screenshots, composition code and ReplaySmith branding are part of this MIT-licensed project. The demo-only vendored GSAP 3.14.2 runtime retains its original notice and its separate Standard no-charge license, reproduced in [the retained license](launch-v1/composition/assets/GSAP-LICENSE.txt). It is not a dependency of the browser automation runtime.

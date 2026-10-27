@@ -5,7 +5,6 @@ ReplaySmith source and original artwork are MIT licensed. No implementation code
 - **Playwright**, Microsoft contributors, Apache-2.0. Browser automation runtime. Distributed as an npm dependency with its own license and notices: https://github.com/microsoft/playwright/blob/main/LICENSE. Its downloaded browser binaries have separate third-party terms retained by the browser installer.
 - **TypeScript**, Microsoft contributors, Apache-2.0; **tsx**, Hiroki Osame and contributors, MIT; **@types/node**, DefinitelyTyped contributors, MIT. Development dependencies retain their package licenses. tsx uses esbuild (MIT).
 - Chrome DevTools Recorder JSON and the Agent Skills specification are interoperable formats. ReplaySmith implements a documented subset of the former and exports the latter. Their documentation is linked in docs/research.md.
-- PaperVizAgent, Puppeteer Replay, workflow-use, record-and-replay-skill, Browser Use, Stagehand, and Skyvern were investigated as references, not vendored. In particular, no AGPL-licensed workflow-use code is incorporated.
 
 The launch media uses the actual ReplaySmith interface and fictional local demo data. SVGs, demo fixtures, screenshots, and composition source are original project assets. System fonts are referenced; no font binaries are redistributed.
 

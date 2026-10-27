@@ -96,7 +96,7 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
     if (selector.startsWith('text/')) return page.getByText(selector.slice(5), { exact: true });
     return page.locator(selector);
   };
-  const resolveOnce = async (rawTarget: Target, action: Step['action'], sensitive: boolean): Promise<{ locator?: Locator; strategy?: StepResult['strategy']; candidates?: Candidate[]; message?: string }> => {
+  const resolveOnce = async (rawTarget: Target, action: Step['action'], sensitive: boolean, deadline: number): Promise<{ locator?: Locator; strategy?: StepResult['strategy']; candidates?: Candidate[]; message?: string }> => {
     const target = resolveTarget(rawTarget);
     const useSelectors = mode === 'selector' || mode === 'recovery';
     if (useSelectors) for (const selector of target.selectors) {
@@ -128,6 +128,8 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
     if (count > 2000) return { message: 'Too many candidate elements; narrow the workflow target.' };
     const candidates: Candidate[] = [];
     for (let index = 0; index < count; index++) {
+      // Do not act on an incomplete ranking after a large page consumes the budget.
+      if (Date.now() >= deadline) return { message: 'Resolution time budget exhausted before candidate ranking completed; no action taken.' };
       const locator = all.nth(index);
       if (!await locator.isVisible()) continue;
       const actual = await evidenceFor(locator);
@@ -141,11 +143,12 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
   };
   const resolve = async (target: Target, action: Step['action'], sensitive: boolean) => {
     const deadline = Date.now() + timeout;
-    let resolved = await resolveOnce(target, action, sensitive);
+    let resolved = await resolveOnce(target, action, sensitive, deadline);
     while (!resolved.locator && !resolved.message?.includes('ambiguous') && Date.now() < deadline) {
       await new Promise(r => setTimeout(r, 50));
-      resolved = await resolveOnce(target, action, sensitive);
+      resolved = await resolveOnce(target, action, sensitive, deadline);
     }
+    if (Date.now() >= deadline) resolved = { message: 'Resolution time budget exhausted; no action taken.' };
     return resolved;
   };
   const sensitiveWords = /\b(pay|purchase|buy|delete|remove|send|publish|transfer|confirm order|place order|submit|checkout)\b/i;

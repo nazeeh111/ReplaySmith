@@ -23,7 +23,7 @@ const HELP=`
   replaysmith inspect <task.json>       Explain steps, inputs, origins and checks
   replaysmith parameterize <task.json> --step <id> --name <input> -o new.json
   replaysmith run <task.json> [--input key=value] [--report run.json]
-                              [--headed] [--allow-sensitive] [--no-recovery] [--inputs-stdin]
+                              [--headed] [--allow-sensitive] [--no-recovery] [--inputs-stdin] [--timeout-ms 15000]
   replaysmith export <task.json> --format playwright -o workflow.mjs
   replaysmith export <task.json> --format skill -o ./my-skill
   replaysmith example -o task.json [--origin http://127.0.0.1:3333]
@@ -35,7 +35,7 @@ const HELP=`
   Recording is limited to one tab and one origin. Add outcome checks before replay.
   Output paths must be new; existing files are never silently overwritten.
 `;
-const valueOptions=new Set(['out','o','port','step','name','format','input','report','origin']);
+const valueOptions=new Set(['out','o','port','step','name','format','input','report','origin','timeout-ms']);
 const flagOptions=new Set(['headed','allow-sensitive','no-recovery','inputs-stdin','help','version']);
 function parse(args:string[]) {
   const positional:string[]=[];const values:Record<string,string[]>={};const flags=new Set<string>();
@@ -56,7 +56,7 @@ async function writeNew(path:string|undefined,content:string){if(!path)throw new
 async function absent(path:string){try{await lstat(path);throw new Error(`Output already exists: ${path}`);}catch(e){if((e as NodeJS.ErrnoException).code!=='ENOENT')throw e;}}
 export async function main(args=process.argv.slice(2)):Promise<number> {
   const options=parse(args);const[command,file]=options.positional;const out=options.value('out')??options.value('o');
-  if(options.flags.has('version')){console.log('0.1.0');return 0;}
+  if(options.flags.has('version')){console.log(JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8')).version);return 0;}
   if(options.flags.has('help')||!command){console.log(HELP);return 0;}
   switch(command) {
     case 'studio': {const port=Number(options.value('port')??3333);const studio=await startStudio(port);console.log(`ReplaySmith studio: ${studio.origin}\nPress Ctrl+C to stop.`);const stop=()=>{void studio.close().then(()=>process.exit(0));};process.once('SIGINT',stop);process.once('SIGTERM',stop);return 0;}
@@ -71,12 +71,14 @@ export async function main(args=process.argv.slice(2)):Promise<number> {
     case 'inspect': {const workflow=validateWorkflow(await readJson(file));console.log(`${workflow.name}\nOrigins: ${workflow.allowedOrigins.join(', ')}\nInputs: ${Object.keys(workflow.inputs).join(', ')||'(none)'}\n`);for(const step of workflow.steps)console.log(`${step.id.padEnd(16)} ${step.action.padEnd(9)} ${step.description??step.target?.evidence.name??step.assertion?.kind??''}${step.sensitive?' [explicit permission required]':''}`);if(workflow.steps.at(-1)?.action!=='assert')console.log('\nNo final outcome check. Add an assertion before relying on replay.');return 0;}
     case 'parameterize': {const workflow=parameterize(validateWorkflow(await readJson(file)),options.value('step')??'',options.value('name')??'');await writeNew(out,JSON.stringify(workflow,null,2)+'\n');console.log(`Created ${out}`);return 0;}
     case 'run': {
+      const timeoutMs=Number(options.value('timeout-ms')??5000);
+      if(!Number.isInteger(timeoutMs)||timeoutMs<100||timeoutMs>60000)throw new Error('--timeout-ms must be an integer from 100 to 60000.');
       const workflow=validateWorkflow(await readJson(file));const inputs:Record<string,string>={};
       for(const pair of options.all('input')){const equal=pair.indexOf('=');if(equal<1)throw new Error('Use --input name=value.');inputs[pair.slice(0,equal)]=pair.slice(equal+1);}
       // Secret values can be supplied through stdin JSON to avoid shell history/process arguments.
       if(options.flags.has('inputs-stdin')){let bytes='';for await(const chunk of process.stdin){bytes+=chunk;if(bytes.length>65536)throw new Error('stdin input exceeds 64 KiB.');}if(bytes.trim()){const object=JSON.parse(bytes);if(!object||typeof object!=='object'||Array.isArray(object))throw new Error('stdin must contain an input object.');for(const [key,value]of Object.entries(object)){if(typeof value!=='string')throw new Error('stdin inputs must be strings.');inputs[key]=value;}}}
       const report=options.value('report');if(report)await absent(resolve(report));
-      const result=await runWorkflow(workflow,{inputs,headless:!options.flags.has('headed'),allowSensitive:options.flags.has('allow-sensitive'),recovery:!options.flags.has('no-recovery'),timeoutMs:5000});
+      const result=await runWorkflow(workflow,{inputs,headless:!options.flags.has('headed'),allowSensitive:options.flags.has('allow-sensitive'),recovery:!options.flags.has('no-recovery'),timeoutMs});
       console.log(JSON.stringify(result,null,2));if(report)await writeNew(report,JSON.stringify(result,null,2)+'\n');
       return result.status==='passed'&&result.verified?0:result.status==='failed'?1:2;
     }

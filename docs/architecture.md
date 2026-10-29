@@ -6,6 +6,7 @@ One Node process serves the studio and executes the same library used by the CLI
 
 | Module | Responsibility |
 | --- | --- |
+| `src/evidence.ts` | Shared DOM fingerprint source embedded in recording, replay and exports |
 | `src/recorder.ts` | Fresh browser, captured actions and fingerprints, local recorder controls |
 | `src/importer.ts` | Explicit Chrome Recorder subset; fail on unsupported semantics |
 | `src/workflow.ts` | JSON validation and explicit parameterization |

@@ -18,7 +18,7 @@
 Requires **Node.js 22+** on macOS, Linux, or Windows. The release contains the built CLI and studio; you do not need a compiler.
 
 ```sh
-npm install --global https://github.com/nazeeh111/ReplaySmith/releases/download/v0.1.0/replaysmith-0.1.0.tgz
+npm install --global https://github.com/nazeeh111/ReplaySmith/releases/download/v0.1.1/replaysmith-0.1.1.tgz
 replaysmith install-browser
 replaysmith studio
 ```
@@ -78,13 +78,27 @@ replaysmith export task.json --format playwright -o workflow.mjs
 replaysmith export task.json --format skill -o exported-skills
 ```
 
-Output paths must be new; existing files are never silently overwritten. Run exit codes are `0` for a verified outcome, `2` for abstention or an unverified run, and `1` for failure or invalid input. Secret runtime inputs can be passed as JSON through `--inputs-stdin`.
+Output paths must be new; existing files are never silently overwritten. Run exit codes are `0` for a verified outcome, `2` for abstention or an unverified run, and `1` for failure or invalid input. Secret runtime inputs can be passed as JSON through `--inputs-stdin`. Slower pages can use `--timeout-ms 15000` with CLI replay or either exported script (default 5000 ms; range 100–60000).
 
 The [workflow guide](docs/workflows.md) covers input preparation, meaningful assertions, sensitive actions, reports, and exports. [Example workflows](examples/) include an ordinary run, changed IDs, and a reused-ID trap on the local demo page.
 
+## Tested on public websites
+
+The v0.1.1 fixes were exercised on TodoMVC, Books to Scrape, The Internet, and the production Python and Playwright documentation sites. Native recordings, changed inputs, actual page outcomes, controlled local DOM changes, and both executable export formats are checked. See the [live-site report](docs/real-websites.md) for exact tasks, evidence, and limits.
+
+From a source checkout:
+
+```sh
+npm run test:live
+# Or preserve a named, new output directory
+npm run test:live -- --out artifacts/live-web/my-run
+```
+
+This is an explicit network smoke test, separate from deterministic CI. It uses fresh browser profiles and read-only or browser-local tasks. External changes or outages fail the run rather than being counted as successes. Recovery mutations affect only the isolated browser DOM or recorded selectors, not the hosted websites.
+
 ## Measured, with limits
 
-The [published benchmark](docs/benchmarks.md) uses **11 controlled local scenarios, four policies, and three repetitions: 132 real Chromium trials**. It reads the fixture's actual saved value and wrong-action counters independently of the run report. All baselines have the same per-operation timeout; semantic playback is an ordinary exact Playwright locator baseline.
+The [published benchmark](docs/benchmarks.md) uses **11 controlled local scenarios, four policies, and three repetitions: 132 real Chromium trials**. It reads the fixture's actual saved value and wrong-action counters independently of the run report. Every policy uses the normal 5000 ms operation budget; semantic playback is an ordinary exact Playwright locator baseline. An earlier 900 ms run is preserved and explained in the report.
 
 | Policy | Changed tasks completed | Wrong-action trials | Safe stops on refusal cases |
 | --- | ---: | ---: | ---: |

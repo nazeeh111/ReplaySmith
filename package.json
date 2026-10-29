@@ -1,6 +1,6 @@
 {
   "name": "replaysmith",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Show it once. Run it reliably. Local browser workflows with evidence-backed recovery and verified outcomes.",
   "type": "module",
   "license": "MIT",
@@ -41,12 +41,13 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test --import tsx tests/*.test.ts",
+    "test": "npm run build && node --test --test-concurrency=1 --import tsx tests/*.test.ts",
     "bench": "npm run build && tsx benchmarks/run.ts",
     "studio": "npm run build && node dist/cli.js studio",
     "demo": "npm run build && tsx scripts/capture-demo.ts",
     "check": "tsc --noEmit",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test:live": "npm run build && node scripts/test-live.mjs"
   },
   "dependencies": {
     "playwright": "1.64.1"

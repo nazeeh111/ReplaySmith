@@ -1,5 +1,6 @@
 import { chromium, type BrowserContext } from 'playwright';
 import type { ElementEvidence, Step, Workflow } from './types.js';
+import { elementEvidenceScript } from './evidence.js';
 
 export interface RecorderOptions { headless?: boolean; onReady?: (context:BrowserContext)=>Promise<void>; signal?: AbortSignal; }
 
@@ -58,35 +59,56 @@ export async function recordWorkflow(url: string, options: RecorderOptions = {})
       if(['fill','select'].includes(step.action)&&previous?.action===step.action&&JSON.stringify(previous.target)===JSON.stringify(step.target)){step.id=previous.id;workflow.steps[workflow.steps.length-1]=step;}
       else workflow.steps.push(step);
     });
-    const installRecorder = () => {
+    const installRecorder = (readEvidence: (element: Element) => Record<string,string>) => {
       if(window.top!==window)return;
-      const send=(payload:unknown)=>{void (window as unknown as {__replaysmithCapture:(p:unknown)=>Promise<void>}).__replaysmithCapture(payload);};
+      let pending:Promise<unknown>=Promise.resolve();
+      const send=(payload:unknown)=>{
+        const deliver=()=>(window as unknown as {__replaysmithCapture:(p:unknown)=>Promise<void>}).__replaysmithCapture(payload);
+        if((payload as {command?:string}).command==='stop')return pending.then(deliver);
+        // Dispatch captures immediately, before a normal link can unload the page.
+        // Stop waits for every outstanding acknowledgement before closing it.
+        const capture=deliver();
+        pending=Promise.allSettled([pending,capture]).then(()=>{});
+        return capture;
+      };
       let asserting=false;
+      let suppressNextClick=false;
+      let pickedPointerId:number|undefined;
+      const showStatus=(text:string)=>{const status=document.getElementById('replaysmith-recorder')?.shadowRoot?.querySelector('#status');if(status)status.textContent=text;};
       const lastValues=new WeakMap<Element,string>();
       const describe=(element:Element)=>{
         const el=element as HTMLElement;
-        const formEl=el as HTMLInputElement;
-        const label='labels' in formEl?Array.from(formEl.labels??[]).map(x=>x.textContent?.trim()??'').join(' '):'';
-        const tag=el.tagName.toLowerCase();
-        const text=(el.textContent??'').replace(/\s+/g,' ').trim().slice(0,240);
-        const name=el.getAttribute('aria-label')||label||el.getAttribute('alt')||text;
-        const type=tag==='input'||tag==='button'?formEl.type:'';
-        const inputRole=type==='checkbox'?'checkbox':type==='radio'?'radio':['button','submit','reset'].includes(type)?'button':type==='number'?'spinbutton':type==='range'?'slider':['password','hidden'].includes(type)?undefined:'textbox';
-        const role=el.getAttribute('role')||({button:'button',a:el.hasAttribute('href')?'link':undefined,textarea:'textbox',select:(el as HTMLSelectElement).multiple?'listbox':'combobox',input:inputRole} as Record<string,string|undefined>)[tag];
-        const section=el.closest('section,form,article');
-        const context=section?.getAttribute('aria-label')||section?.querySelector('h1,h2,h3,legend')?.textContent?.trim();
-        const evidence:Record<string,string|undefined>={tag,name,text,label,role,context,type:el.getAttribute('type')??undefined,testId:el.getAttribute('data-testid')??undefined,placeholder:el.getAttribute('placeholder')??undefined};
+        const evidence = readEvidence(el);
         let selector=el.id?`#${CSS.escape(el.id)}`:evidence.testId?`[data-testid=${JSON.stringify(evidence.testId)}]`:'';
         if(!selector){const parts:string[]=[];let node:Element|null=el;while(node&&node!==document.documentElement){const parentEl:Element|null=node.parentElement;const siblings:Element[]=parentEl?Array.from(parentEl.children).filter(x=>x.tagName===node!.tagName):[];parts.unshift(`${node.tagName.toLowerCase()}:nth-of-type(${siblings.indexOf(node)+1})`);node=parentEl;}selector=parts.join(' > ');}
         return{selector,evidence:Object.fromEntries(Object.entries(evidence).filter(([,value])=>typeof value==='string'&&value.length>0))};
       };
       const eligible=(target:EventTarget|null)=>target instanceof Element && !target.closest('#replaysmith-recorder');
-      document.addEventListener('click',event=>{
+      const captureAssertion=(element:Element)=>{
+        asserting=false;
+        showStatus('Capturing outcome…');
+        void send({action:'assert',...describe(element)}).then(()=>showStatus('Outcome captured'),()=>showStatus('Capture failed; try again'));
+      };
+      // Pick before mouse/DOM hydration handlers can replace the pressed target.
+      // A later gesture always resets suppression, even if this gesture emitted no click.
+      window.addEventListener('pointerdown',event=>{
+        suppressNextClick=false;pickedPointerId=undefined;
+        if(!asserting||event.button!==0||!eligible(event.target))return;
+        event.preventDefault();event.stopImmediatePropagation();
+        suppressNextClick=true;pickedPointerId=event.pointerId;
+        captureAssertion(event.target as Element);
+      },true);
+      window.addEventListener('click',event=>{
+        if(suppressNextClick&&(event.detail>0||('pointerId' in event&&event.pointerId===pickedPointerId))){
+          suppressNextClick=false;pickedPointerId=undefined;
+          event.preventDefault();event.stopImmediatePropagation();return;
+        }
         if(!eligible(event.target))return;
         const raw=event.target as Element;
-        if(asserting){event.preventDefault();event.stopImmediatePropagation();asserting=false;send({action:'assert',...describe(raw)});return;}
+        // Keyboard and synthetic activation have no preceding pointerdown.
+        if(asserting){event.preventDefault();event.stopImmediatePropagation();captureAssertion(raw);return;}
         const el=raw.closest('button,a,input[type=checkbox],input[type=radio],input[type=submit],input[type=button],input[type=reset],[role=button],[role=link]');
-        if(el)send({action:'click',...describe(el)});
+        if(el)void send({action:'click',...describe(el)});
       },true);
       const captureValue=(event:Event)=>{
         if(!eligible(event.target))return;
@@ -107,14 +129,17 @@ export async function recordWorkflow(url: string, options: RecorderOptions = {})
         host.style.cssText='position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2147483647';
         const root=host.attachShadow({mode:'open'});
         const style=document.createElement('style');style.textContent='div{display:flex;gap:12px;align-items:center;background:#202820;color:#fafcf4;padding:12px 18px;border:1px solid #647158;border-radius:8px;font:13px system-ui;box-shadow:0 6px 30px #0003}button{font:600 12px system-ui;background:#d9fa77;color:#1c2810;border:0;border-radius:4px;padding:9px 12px;cursor:pointer}';root.append(style);
-        const bar=document.createElement('div');const label=document.createElement('span');label.textContent='● ReplaySmith recording';
+        const bar=document.createElement('div');const label=document.createElement('span');label.id='status';label.textContent='● ReplaySmith recording';
         const assertBtn=document.createElement('button');assertBtn.textContent='Assert text';assertBtn.id='assert';assertBtn.onclick=()=>{asserting=true;label.textContent='Click the outcome text to verify';};
-        const stopBtn=document.createElement('button');stopBtn.textContent='Stop & review';stopBtn.id='stop';stopBtn.onclick=()=>send({command:'stop'});
+        const stopBtn=document.createElement('button');stopBtn.textContent='Stop & review';stopBtn.id='stop';stopBtn.onclick=()=>{stopBtn.disabled=true;void send({command:'stop'});};
         bar.append(label,assertBtn,stopBtn);root.append(bar);document.documentElement.append(host);
       };
       if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
     };
-    await context.addInitScript(`(() => { const __name = (fn) => fn; (${installRecorder.toString()})(); })()`);
+    // Compile the trusted extraction body in Node, then inject an ordinary function.
+    // Page-side Function/eval would violate sites' Content-Security-Policy.
+    const readEvidence = new Function('el', elementEvidenceScript) as (element: Element) => Record<string,string>;
+    await context.addInitScript(`(() => { const __name = (fn) => fn; (${installRecorder.toString()})(${readEvidence.toString()}); })()`);
     page.on('framenavigated',frame=>{
       if(frame!==page.mainFrame()||frame.url()==='about:blank'||frame.url()===initial.href)return;
       if(new URL(frame.url()).origin!==initial.origin)return;

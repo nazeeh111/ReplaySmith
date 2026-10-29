@@ -42,7 +42,7 @@ Keep that private input file outside version control. Secret masking cannot reco
 
 ## Define the outcome
 
-Add a final outcome check after the last action. Use an exact element text, input value, URL, or visible element. A good check expresses the task result, such as the exact saved note or an order's draft status. A visible submit button is usually a weak check.
+Add a final outcome check after the last action. Use an exact element text, input value, URL, or visible element. Text checks use normalized DOM `textContent`, the same text captured by the recorder; hidden descendant text, such as heading permalink markers, is included. A good check expresses the task result, such as the exact saved note or an order's draft status. A visible submit button is usually a weak check.
 
 A run can report `status: passed` with `verified: false` if it has no trailing outcome checks. CLI and generated scripts exit successfully only when both the steps and outcome verification pass. Exit `2` means abstention or an unverified run; exit `1` means failure or invalid input. The run report includes the strategy used for each target and the top recovery candidates when ranking was needed.
 
@@ -74,3 +74,5 @@ node workflow.mjs --inputs '{"note":"A different note"}'
 The skill export creates `exported-skills/<workflow-slug>/`, with a matching `SKILL.md` name, workflow JSON, a pinned package manifest, and `scripts/run.mjs`. The studio downloads this directory as a ZIP. Read the skill before installing it in an Agent Skills host. Filesystem export does not register it with a marketplace or authorize an agent to perform the task.
 
 Re-export after changing the workflow or upgrading ReplaySmith: each export freezes that version's behavior.
+
+For slower pages, CLI replay and both exported scripts accept `--timeout-ms 15000`. The default operation timeout is 5000 milliseconds; valid integer values are 100 through 60000. A timeout remains a failure or safe abstention, never successful verification. API users can set `timeoutMs` in run options.

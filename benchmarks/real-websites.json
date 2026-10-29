@@ -1,0 +1,1255 @@
+{
+  "version": 1,
+  "packageVersion": "0.1.1",
+  "checkedDate": "2026-10-29",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "scope": "Eight public-site smoke workflows across five sites. Python and Playwright are production documentation; Books to Scrape, TodoMVC and The Internet are practice apps. No arbitrary-site reliability statistic.",
+  "protocol": {
+    "operationTimeoutMs": 15000,
+    "exportDefaultTimeoutMs": 5000,
+    "normalApiRuns": 8,
+    "localDomRecoveryRuns": 3,
+    "actualExportProcesses": 22,
+    "nativeRecordingRepeatTrials": 3,
+    "freshProfiles": true,
+    "recoveryMutation": "Only isolated browser DOM wrappers/IDs and stale recorded click selectors; hosted websites unchanged.",
+    "outcomes": "API outcomes also inspected independently. Export verification uses trailing workflow assertions and separate process success.",
+    "externalFailures": "External outages/timeouts fail acceptance. No automatic acceptance retries."
+  },
+  "runtimeHashes": {
+    "recorder": "848203d7981d440c2711f0c896cd1cd839959dc4ab2c917e4e9d0b92b26ebea6",
+    "runner": "818f258fa960a2f770dab5fabebecca12acc9f2ad55e24cb92082cee8bea4c4f",
+    "evidence": "e242821bd8ce92a51a937ab7a39d0abace268deeb7eed58097f0bc9eef1953c2",
+    "prepare": "e9c866a2b1b80b3f16b272b076b3813bff079264f66af9b1c2756d004437d184",
+    "exporter": "7fec1388832642ef3728f48d896c15e07309a00fda20ac45dfb10f3860424479",
+    "recovery": "73f99af6d47f5f4c2e744a8ecf604dde50978a59fbfaed1092f5410fc74a9bdb"
+  },
+  "provenanceHashes": {
+    "src/cli.ts": "4a42480e96a2003ffe334a116f90e34606968b7b84ebbbda0c73ee8a64d26e30",
+    "src/recorder.ts": "27df56dca0109fcddd6a8dfe043c51634594c9ad678a874231eb1672f03f37b2",
+    "src/evidence.ts": "bb10985662f3f59aa767cf9d8d86a4101eddf70f5b0d1a522c18a9c09808b4d7",
+    "src/runner.ts": "7df685c7555c74f2ea69fb83d8a533cbe088f21e0575749918fe26cf3cf0a080",
+    "src/recovery.ts": "a29bf083aa0b15f6b67e87ef163f0a2ea0a36f577a96be265d13a2cabf7b5111",
+    "src/prepare.ts": "b64d04f985c624b126496ce5102385f856e926e84833173fd18dcd2d56914a4f",
+    "src/exporter.ts": "e3ff846047e7e64c4d40503847ed57d56da9aadb1a993f4c28fc6884a4f0b0aa",
+    "scripts/test-live.mjs": "ebbe364b4c27a97b4d020f19e2b5446bdda674bdcb0e55b98f0fa8f9cadf253b",
+    "scripts/live-navigation.mjs": "4232db54fac980615cdcec182b2e1baca8653dcfda1a0ce7e68c0d12d371ff47",
+    "scripts/live-todomvc.mjs": "0977baa2bdcfd1cb4cf5a2c620370ab9bc99cc73566cbcf5601fd2180cb043f3",
+    "scripts/live-internet.mjs": "cb7e7d576dd00be8129c4540fc0c92193233e6730a894087cc4cd991305774d8",
+    "tests/core-browser.test.ts": "3da9882c6bcc11e190211d26f1e15e4213b1a55dd769e0d593064c88014cc95d",
+    "tests/live-regressions.test.ts": "0f44ce4ef80c929f8b3100c42a274b7ba53db4db5d03b01c2e01f33e23069c71",
+    "tests/cli.test.ts": "cc4ef3666c7aff4bce096484e637bfd3807a790ae1d5cd2f9e76109328cbf7c4",
+    "package.json": "5e770d20c20713be48d24e7290caffec63ed2b2ff5760c9614b36ed701fcac7b",
+    "package-lock.json": "c8d5c39c93dc58ccf98e2c1e3e9b9df10847adaa5f09c6b63c178fc687997944"
+  },
+  "suites": [
+    {
+      "suite": "navigation",
+      "startedAt": "2026-10-29T05:46:09.749Z",
+      "completedAt": "2026-10-29T05:49:43.851Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "suite": "todomvc",
+      "startedAt": "2026-10-29T05:49:43.852Z",
+      "completedAt": "2026-10-29T05:50:33.420Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "suite": "internet",
+      "startedAt": "2026-10-29T05:50:33.424Z",
+      "completedAt": "2026-10-29T05:54:04.128Z",
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "books",
+      "url": "https://books.toscrape.com/",
+      "checkedAt": "2026-10-29T05:46:10.800Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click",
+        "assert"
+      ],
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1418,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "headingObserved": true
+      },
+      "localDomRecovery": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 925,
+        "steps": [
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "recovered",
+            "strategy": "semantic"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentRecoveryOutcome": {
+        "headingObserved": true,
+        "recoveryUsed": true
+      },
+      "exports": {
+        "original:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1501,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "original:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1012,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "stale-selectors:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1186,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "stale-selectors:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1369,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "python-docs",
+      "url": "https://docs.python.org/3/",
+      "checkedAt": "2026-10-29T05:47:24.489Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click",
+        "assert"
+      ],
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 663,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "recovery"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "headingObserved": true
+      },
+      "localDomRecovery": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 555,
+        "steps": [
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "recovered",
+            "strategy": "semantic"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "recovery"
+          }
+        ]
+      },
+      "independentRecoveryOutcome": {
+        "headingObserved": true,
+        "recoveryUsed": true
+      },
+      "exports": {
+        "original:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 989,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "recovery"
+            }
+          ]
+        },
+        "original:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1096,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "semantic"
+            }
+          ]
+        },
+        "stale-selectors:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1158,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "recovery"
+            }
+          ]
+        },
+        "stale-selectors:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1177,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "recovery"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "playwright-docs",
+      "url": "https://playwright.dev/docs/intro",
+      "checkedAt": "2026-10-29T05:48:27.155Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click",
+        "assert"
+      ],
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1474,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "recovery"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "headingObserved": true
+      },
+      "localDomRecovery": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 656,
+        "steps": [
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "recovered",
+            "strategy": "semantic"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentRecoveryOutcome": {
+        "headingObserved": true,
+        "recoveryUsed": true
+      },
+      "exports": {
+        "original:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1184,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "original:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1224,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "stale-selectors:playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1135,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "stale-selectors:skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 1948,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "recovered",
+              "strategy": "semantic"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "todomvc-react",
+      "url": "https://todomvc.com/examples/react/dist/",
+      "startedAt": "2026-10-29T05:49:45.017Z",
+      "completedAt": "2026-10-29T05:50:33.385Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "fill",
+        "press",
+        "click",
+        "click",
+        "click",
+        "assert"
+      ],
+      "changedInput": true,
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 1621,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "fill",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "press",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-4",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-5",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-6",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-7",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "url": "https://todomvc.com/examples/react/dist/#/completed",
+        "visibleTodos": [
+          "ReplaySmith changed TodoMVC input"
+        ],
+        "completedTodos": [
+          "ReplaySmith changed TodoMVC input"
+        ],
+        "checked": true,
+        "count": "0 items left!",
+        "storageKeys": []
+      },
+      "exports": {
+        "standalone": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 2043,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "fill",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "press",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-4",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-5",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-6",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-7",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 3049,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "fill",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "press",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-4",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-5",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-6",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-7",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "internet-dropdown",
+      "url": "https://the-internet.herokuapp.com/dropdown",
+      "startedAt": "2026-10-29T05:50:35.621Z",
+      "completedAt": "2026-10-29T05:51:13.165Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "select",
+        "assert"
+      ],
+      "preparation": {
+        "inputs": {
+          "input_step_2": "2"
+        },
+        "note": "Improved native text assertion on a select to an explicit selected-value assertion, then changed Option 1 to Option 2. No target evidence edits."
+      },
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 658,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "select",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "selected": "2"
+      },
+      "independentOutcomePassed": true,
+      "exports": {
+        "playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 736,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "select",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 939,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "select",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "internet-dynamic-controls",
+      "url": "https://the-internet.herokuapp.com/dynamic_controls",
+      "startedAt": "2026-10-29T05:51:13.167Z",
+      "completedAt": "2026-10-29T05:52:27.025Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click",
+        "fill",
+        "assert"
+      ],
+      "preparation": {
+        "inputs": {
+          "input_step_3": "changed harmless value"
+        },
+        "note": "Changed the automatically prepared text input; retained native assertion that the input is enabled."
+      },
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 3637,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "fill",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-4",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "enabled": true,
+        "value": "changed harmless value"
+      },
+      "independentOutcomePassed": true,
+      "exports": {
+        "playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 4116,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "fill",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-4",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 3654,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "fill",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-4",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "internet-checkboxes",
+      "url": "https://the-internet.herokuapp.com/checkboxes",
+      "startedAt": "2026-10-29T05:52:27.027Z",
+      "completedAt": "2026-10-29T05:52:59.198Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click"
+      ],
+      "preparation": {
+        "inputs": {},
+        "note": "Improved the click-only native recording with an explicit visible :checked selector and no recovery evidence, then independently inspected checked state."
+      },
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 601,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "verify-checked",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "firstChecked": true,
+        "secondChecked": true
+      },
+      "independentOutcomePassed": true,
+      "exports": {
+        "playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 582,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "verify-checked",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 761,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "verify-checked",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "internet-dynamic-loading",
+      "url": "https://the-internet.herokuapp.com/dynamic_loading/2",
+      "startedAt": "2026-10-29T05:52:59.200Z",
+      "completedAt": "2026-10-29T05:54:04.102Z",
+      "browserVersion": "156.0.8078.4",
+      "nativeActions": [
+        "navigate",
+        "click",
+        "assert"
+      ],
+      "preparation": {
+        "inputs": {},
+        "note": "Retained native delayed outcome text assertion."
+      },
+      "replay": {
+        "status": "passed",
+        "verified": true,
+        "durationMs": 5695,
+        "steps": [
+          {
+            "id": "step-1",
+            "action": "navigate",
+            "status": "passed"
+          },
+          {
+            "id": "step-2",
+            "action": "click",
+            "status": "passed",
+            "strategy": "selector"
+          },
+          {
+            "id": "step-3",
+            "action": "assert",
+            "status": "passed",
+            "strategy": "selector"
+          }
+        ]
+      },
+      "independentOutcome": {
+        "finishVisible": true,
+        "text": "Hello World!"
+      },
+      "independentOutcomePassed": true,
+      "exports": {
+        "playwright": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 5673,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        },
+        "skill": {
+          "exitCode": 0,
+          "status": "passed",
+          "verified": true,
+          "durationMs": 5686,
+          "steps": [
+            {
+              "id": "step-1",
+              "action": "navigate",
+              "status": "passed"
+            },
+            {
+              "id": "step-2",
+              "action": "click",
+              "status": "passed",
+              "strategy": "selector"
+            },
+            {
+              "id": "step-3",
+              "action": "assert",
+              "status": "passed",
+              "strategy": "selector"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "nativeRecordingRepeat": {
+    "startedAt": "2026-10-29T05:45:19.152Z",
+    "completedAt": "2026-10-29T05:46:03.178Z",
+    "allThreeCaptured": true,
+    "trials": [
+      {
+        "repetition": 1,
+        "success": true,
+        "actions": [
+          "navigate",
+          "click",
+          "assert"
+        ],
+        "assertedText": "Locators"
+      },
+      {
+        "repetition": 2,
+        "success": true,
+        "actions": [
+          "navigate",
+          "click",
+          "assert"
+        ],
+        "assertedText": "Locators"
+      },
+      {
+        "repetition": 3,
+        "success": true,
+        "actions": [
+          "navigate",
+          "click",
+          "assert"
+        ],
+        "assertedText": "Locators"
+      }
+    ]
+  },
+  "localRegressionEvidence": {
+    "finalFullRun": {
+      "tests": 51,
+      "passed": 45,
+      "failed": 6,
+      "skipped": 0,
+      "observation": "Six older cases using 300 to 900 ms budgets timed out during host slowdown; all new capture, export, CSP, heading and deadline cases passed.",
+      "logSha256": "ef5d9bf78e62bc433dbb912addddbbdcb5de9f35324cb440342d37b068b9958b"
+    },
+    "isolatedAffectedCases": {
+      "tests": 6,
+      "passed": 6,
+      "failed": 0,
+      "originalBudgetsUnchanged": true,
+      "logSha256": "3264385a3b102c0b28d21782f733d0cb8bff57431041867b3cf5735d9ec33651"
+    },
+    "note": "Full Node 22/24 CI is required separately before stable publication.",
+    "localCoverageNote": "The six affected cases passed an isolated recheck with their original budgets. This does not turn the complete local run into a 51/51 pass.",
+    "earlierBenchmark": {
+      "operationTimeoutMs": 900,
+      "trials": 132,
+      "recoverableTaskCompletions": 15,
+      "recoverableVerifiedCompletions": 14,
+      "failedAcceptanceTrial": "id-drift#1",
+      "observation": "The correct input was saved once; Playwright click timed out before the runtime could verify the result. Full earlier evidence is preserved in benchmarks/budget-900ms-results.json. The next benchmark uses the normal 5000 ms budget equally for every policy.",
+      "policy": "recovery",
+      "recoveryIncorrectActions": 0,
+      "diagnosticLimit": "The sanitized report omits the original browser error type. The over-budget duration and successful side effect are observed; timeout is an inference."
+    }
+  },
+  "earlierAttempts": [
+    {
+      "version": "v0.1.0",
+      "revision": "aaab074b3126453090bc170f7a1cadbd3adac318",
+      "observations": [
+        "TodoMVC nested context mismatch rejected Active link.",
+        "Unnamed select gained option-text name in capture and abstained.",
+        "Asynchronously enabled field abstained before ready.",
+        "Python heading hidden permalink text mismatched replay.",
+        "Native Playwright docs assertion capture intermittent; precise production cause unproven."
+      ]
+    },
+    {
+      "candidate": "pre-heading v0.1.1",
+      "result": "failed",
+      "observations": [
+        "Window-only capture missed one of three final assertions.",
+        "Full suite failed exported docs heading ambiguity after layout change."
+      ]
+    },
+    {
+      "candidate": "picker/default-export-budget v0.1.1",
+      "result": "failed or unavailable",
+      "observations": [
+        "Three of three native docs capture trials succeeded.",
+        "Concurrent full local test run passed48 of49; exported local heading navigation timed out.",
+        "Navigation live harness reached600second child deadline; multiple default5000ms export operations timed out.",
+        "TodoMVC passed; Internet delayed heading selected an unrelated same-level heading before target appeared, causing assertion failure. Added identifying-evidence requirement to heading fallback.",
+        "These earlier failures were preserved. Final build adds allSettled Stop drain and configurable export timeout; final acceptance uses15000ms consistently and runs apart from offline tests."
+      ]
+    }
+  ],
+  "limits": [
+    "Small developer-authored smoke suite; no claim of arbitrary website reliability.",
+    "Outcome picker captures text; checkbox state assertion was added explicitly.",
+    "Recorder accessible-name approximation is not the complete WAI-ARIA algorithm.",
+    "One tab/origin; frames, HTTP redirects and arbitrary meaning changes remain unsupported.",
+    "Re-record old inconsistent fingerprints; no automatic weakening of recovery thresholds."
+  ]
+}

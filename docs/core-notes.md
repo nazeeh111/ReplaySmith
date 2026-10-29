@@ -6,11 +6,11 @@ ReplaySmith's runtime is a deterministic Playwright program. The standalone Play
 
 Selector matches are checked against recorded semantic evidence when identifying evidence is available. A recycled selector whose element conflicts with the fingerprint is rejected. Semantic alternatives are tried next. Finally, visible candidate elements receive an inspectable weighted token-overlap score. Fields include role, name, label, text, test ID, placeholder, input type, link destination and the named surrounding form/section/group. Role or input-type conflicts disqualify a candidate. Recovery requires score >= 0.78 and a lead >= 0.12 over the next candidate. These constants are heuristics, not calibrated probabilities; no trained model or universal reliability claim is made.
 
-Recovery supports small wording changes, changed IDs/structure, accessible alternatives and named surrounding context. It cannot infer arbitrary synonyms or site intent. Fingerprinting approximates a subset of accessible-name computation; it is not the full WAI-ARIA algorithm. Missing, ambiguous, disabled or low-evidence targets cause abstention. A bounded polling loop waits for late controls. Playwright still performs its normal actionability checks.
+Recovery supports small wording changes, changed IDs/structure, accessible alternatives and named surrounding context. It cannot infer arbitrary synonyms or site intent. Recording, replay and both exports use the same browser-side fingerprint extractor, including default control types, ARIA label references, placeholders and nested heading context. Fingerprinting approximates a subset of accessible-name computation; it is not the full WAI-ARIA algorithm. Missing, ambiguous, disabled or low-evidence targets cause abstention. A bounded polling loop waits for late controls and asynchronously enabled/editable fields, rechecking target identity and consequence permissions before acting once. Permanently disabled or replaced targets abstain. Playwright still performs its normal actionability checks.
 
 ## Outcomes
 
-A run with all actions completed can have status `passed` while `verified` is false. Verification additionally requires at least one successful trailing assertion after the last action. Text and value assertions use exact values (text normalizes whitespace), URL assertions use exact full URLs, and visible assertions require one visible matched element. Users must choose a meaningful business outcome; the runtime cannot prove that a weak assertion expresses the intended task.
+A run with all actions completed can have status `passed` while `verified` is false. Verification additionally requires at least one successful trailing assertion after the last action. Text and value assertions use exact values (text normalizes DOM textContent whitespace, including hidden descendant text such as documentation permalink markers), URL assertions use exact full URLs, and visible assertions require one visible matched element. Users must choose a meaningful business outcome; the runtime cannot prove that a weak assertion expresses the intended task.
 
 ## Safety boundary
 
@@ -27,3 +27,9 @@ Chrome DevTools Recorder `navigate`, primary single `click`, `change`, simple ke
 ## Export maintenance
 
 The exported script freezes the workflow and engine behavior at export time. Re-export after updating a workflow or ReplaySmith version. The Agent Skill is portable filesystem content; no upload, marketplace registration or external agent execution is implied by export.
+
+## v0.1.1 recording compatibility
+
+Recording and replay now share the same DOM fingerprint source. This fixes mismatched names for unnamed selects and context from nested section headings. Old v0.1.0 recordings with fabricated or inconsistent evidence are not silently weakened: re-record affected tasks or explicitly review their evidence in the studio. Controls that are temporarily disabled wait within the existing timeout; permanently disabled, changed-identity, and unauthorized targets still abstain.
+
+Normal recorder click capture runs at the window capture phase. The outcome picker captures on pointer press before mouse handlers can replace the target, with a click fallback for keyboard and synthetic activation. Stop waits for earlier capture acknowledgements, including when another capture rejects. The recorder injects a normal function and does not require unsafe-eval or a relaxed Content Security Policy. Text outcome checks normalize DOM textContent, matching capture even when descendants include hidden permalink markers. Earlier replay compared visible text, so review hand-authored checks on elements with hidden descendants when upgrading.

@@ -13,6 +13,7 @@ export function scoreEvidence(expected: ElementEvidence, actual: ElementEvidence
   // Role/type conflicts disqualify candidates rather than being averaged away.
   if (expected.role && norm(expected.role) !== norm(actual.role)) return { score: 0, reasons: ['role conflicts'] };
   if (expected.type && norm(expected.type) !== norm(actual.type)) return { score: 0, reasons: ['input type conflicts'] };
+  if (expected.role === 'heading' && /^h[1-6]$/.test(expected.tag ?? '') && expected.tag !== actual.tag) return { score: 0, reasons: ['heading level conflicts'] };
   const fields: [keyof ElementEvidence, number][] = [['name', 5], ['label', 5], ['testId', 5], ['text', 4], ['placeholder', 3], ['context', 4], ['href', 3], ['role', 1], ['tag', 0.5], ['type', 0.5]];
   let total = 0, earned = 0;
   const reasons: string[] = [];

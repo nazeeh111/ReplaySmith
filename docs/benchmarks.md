@@ -1,6 +1,6 @@
 # Controlled browser benchmark
 
-Generated 2026-10-26T23:08:20.813Z. Full per-trial evidence: [results.json](../benchmarks/results.json).
+Generated 2026-10-29T06:07:01.781Z. Full per-trial evidence: [results.json](../benchmarks/results.json).
 
 ## Reproduce
 
@@ -11,20 +11,24 @@ npm run bench
 # Optional: npm run bench -- --repetitions 5
 ```
 
-3 repetitions of 11 local scenarios for each of four policies. Each policy uses the same 900 ms timeout setting for target resolution, actions, and assertions. A resolution wait and a subsequent action can each consume this setting; elapsed time is recorded directly. Each trial uses a fresh browser context; browser launch and context creation are excluded from elapsed time. Policy order rotates between repetitions. The JSON includes SHA-256 hashes of the runtime, fixture, benchmark source, and dependency lockfile read before execution. Environment: Node v24.14.0; darwin/arm64; Chromium 156.0.8078.4.
+3 repetitions of 11 local scenarios for each of four policies. Each policy uses the same 5000 ms timeout setting for target resolution, actions, and assertions. A resolution wait and a subsequent action can each consume this setting; elapsed time is recorded directly. Each trial uses a fresh browser context; browser launch and context creation are excluded from elapsed time. Policy order rotates between repetitions. The JSON includes SHA-256 hashes of the runtime, fixture, benchmark source, and dependency lockfile read before execution. Environment: Node v24.14.0; darwin/arm64; Chromium 156.0.8078.4.
 
 ## Observed results
 
 | Policy | Task completed | Trials with wrong action | Safe abstentions | Safe stops | Recoverable changes completed | Original median ms |
 | --- | --- | --- | --- | --- | --- | --- |
-| selector | 3/33 | 3 | 0/12 | 12/12 | 0/15 | 394.2 |
-| semantic | 15/33 | 0 | 0/12 | 12/12 | 12/15 | 101.1 |
-| heuristic | 18/33 | 6 | 0/12 | 6/12 | 12/15 | 297.7 |
-| recovery | 18/33 | 0 | 12/12 | 12/12 | 15/15 | 644.3 |
+| selector | 3/33 | 3 | 0/12 | 12/12 | 0/15 | 173 |
+| semantic | 15/33 | 0 | 0/12 | 12/12 | 12/15 | 100.2 |
+| heuristic | 18/33 | 6 | 0/12 | 6/12 | 12/15 | 234 |
+| recovery | 18/33 | 0 | 12/12 | 12/12 | 15/15 | 641 |
 
 Task completion is independent fixture ground truth: the exact input was saved once and no decoy action fired. Wrong actions count clicks on the instrumented delete decoy, not merely a failed assertion. Safe abstention means an explicit abstained result with zero saves and zero decoy actions on a case designated for refusal. Safe stop also includes timeout/failure before side effects. These measures are separated because a timeout is not an explained abstention.
 
-On the unchanged control, recovery's measured median difference was 250.1 ms relative to the selector baseline and 543.2 ms relative to the semantic baseline. These tiny local samples are timing observations, not statistically supported speed claims. All-case medians in JSON include intentional waits and failures and should not be interpreted as runtime overhead.
+On the unchanged control, recovery's measured median difference was 468 ms relative to the selector baseline and 540.8 ms relative to the semantic baseline. These tiny local samples are timing observations, not statistically supported speed claims. All-case medians in JSON include intentional waits and failures and should not be interpreted as runtime overhead.
+
+## Earlier short-budget run
+
+An earlier 900 ms run on this final runtime saved the correct input once in all 15 recoverable trials, but one click timed out after its side effect, preventing verification in that trial. The complete [900 ms evidence](../benchmarks/budget-900ms-results.json) is preserved, including the failed acceptance gate. The canonical benchmark now uses the ordinary 5000 ms runtime budget equally for all four policies. This changes the declared protocol, not ranking thresholds or success criteria; the earlier run is not relabeled as successful.
 
 ## Policies
 

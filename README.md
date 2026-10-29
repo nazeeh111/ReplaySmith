@@ -117,4 +117,4 @@ Workflows are executable instructions. Review them and their origin list before 
 
 One TypeScript/Node library, Playwright, and a dependency-free studio. No second browser framework, database, orchestration platform, model download, or custom ML. The [architecture note](docs/architecture.md) maps the diagram to source modules. The [launch composition](demo/) and [capture script](scripts/capture-demo.ts) preserve how the demo was made.
 
-MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md) document dependencies and attribution. Reproducible bug reports and focused changes are welcome through [issues](https://github.com/nazeeh111/ReplaySmith/issues) and [contributions](CONTRIBUTING.md).
+MIT licensed. Reproducible bug reports and focused changes are welcome through [issues](https://github.com/nazeeh111/ReplaySmith/issues) and [contributions](CONTRIBUTING.md).

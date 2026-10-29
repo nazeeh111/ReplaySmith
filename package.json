@@ -36,8 +36,7 @@
     "studio",
     "examples",
     "README.md",
-    "LICENSE",
-    "THIRD_PARTY_NOTICES.md"
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsc",

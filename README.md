@@ -1,17 +1,12 @@
-<p align="center"><img src="assets/brand.svg" width="900" alt="ReplaySmith. Show it once. Run it reliably."></p>
+# ReplaySmith
 
-<p align="center">
-  <a href="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml"><img src="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/nazeeh111/ReplaySmith/releases"><img src="https://img.shields.io/github/v/release/nazeeh111/ReplaySmith?color=e8532d" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-637354" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/Node.js-22%2B-637354" alt="Node.js 22 or later">
-</p>
+**Record a browser task. Replay it with a checked outcome.**
 
-**Turn a demonstrated browser task into a reusable workflow with inputs, recovery evidence, and an outcome you can verify.** Run it locally, inspect why an element was chosen, and export the same behavior as Playwright code or an Agent Skill. No model, API key, account, or subscription required.
-
-<p align="center"><a href="https://github.com/nazeeh111/ReplaySmith/releases/latest">Download</a> · <a href="docs/workflows.md">Workflow guide</a> · <a href="docs/benchmarks.md">Benchmarks</a> · <a href="docs/research.md">Prior art</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+Turn a demonstration into an editable workflow with inputs, bounded target recovery and an explicit result check. Inspect each decision, then export the behavior as Playwright code or an Agent Skill. Runs locally without a model or API key.
 
 ![Actual ReplaySmith studio demonstration](assets/demo.gif)
+
+[Try the local example](#try-it-in-two-minutes) · [Download](https://github.com/nazeeh111/ReplaySmith/releases/latest) · [Workflow guide](docs/workflows.md) · [Benchmarks](docs/benchmarks.md) · [Prior art](docs/research.md) · [Contribute](CONTRIBUTING.md)
 
 ## Try it in two minutes
 
@@ -97,6 +92,13 @@ npm run test:live -- --out artifacts/live-web/my-run
 This is an explicit network smoke test, separate from deterministic CI. It uses fresh browser profiles and read-only or browser-local tasks. External changes or outages fail the run rather than being counted as successes. Recovery mutations affect only the isolated browser DOM or recorded selectors, not the hosted websites.
 
 ## Measured, with limits
+
+<p align="center">
+  <a href="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml"><img src="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/nazeeh111/ReplaySmith/releases"><img src="https://img.shields.io/github/v/release/nazeeh111/ReplaySmith?color=e8532d" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-637354" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/Node.js-22%2B-637354" alt="Node.js 22 or later">
+</p>
 
 The [published benchmark](docs/benchmarks.md) uses **11 controlled local scenarios, four policies, and three repetitions: 132 real Chromium trials**. It reads the fixture's actual saved value and wrong-action counters independently of the run report. Every policy uses the normal 5000 ms operation budget; semantic playback is an ordinary exact Playwright locator baseline. An earlier 900 ms run is preserved and explained in the report.
 

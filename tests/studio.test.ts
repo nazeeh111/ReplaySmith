@@ -27,7 +27,7 @@ test('studio imports, edits, verifies, exports and handles invalid source throug
     // A changed input must reach the real browser and its explicit receipt assertion.
     await page.getByRole('button', { name: 'Run workflow', exact: false }).click();
     await page.getByRole('heading', { name: 'The outcome checks passed.', exact: true }).waitFor();
-    assert.equal(await page.locator('#workflow-status').textContent(), 'Verified');
+    assert.equal(await page.locator('#workflow-status').textContent(), 'Outcome verified');
     assert.equal(await page.locator('.report-step').count(), 4);
     assert.equal(await page.locator('.result-tag').filter({ hasText: 'Passed' }).count(), 4);
 
@@ -68,7 +68,7 @@ test('studio imports, edits, verifies, exports and handles invalid source throug
     await page.getByRole('button', { name: 'Step 4: Confirm the saved dispatch note', exact: true }).waitFor();
     await page.getByRole('button', { name: 'Run workflow', exact: false }).click();
     await page.getByRole('heading', { name: 'The outcome checks passed.', exact: true }).waitFor();
-    assert.equal(await page.locator('#workflow-status').textContent(), 'Verified');
+    assert.equal(await page.locator('#workflow-status').textContent(), 'Outcome verified');
 
     await page.getByRole('button', { name: 'Export', exact: false }).click();
     const playwrightDownload = page.waitForEvent('download');

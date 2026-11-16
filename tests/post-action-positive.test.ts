@@ -1,0 +1,7 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import {chromium} from 'playwright'; import {runOnPage} from '../src/runner.js';
+for (const scenario of ['label change','navigation'] as const) test(`ordinary ${scenario} continues to its outcome assertion`,async()=>{
+ const browser=await chromium.launch();const context=await browser.newContext({offline:true,serviceWorkers:'block'});const page=await context.newPage();
+ await page.route('**/*',r=>r.fulfill({contentType:'text/html',body:scenario==='label change'?`<button id="go" onclick="this.textContent='Paused';document.querySelector('output').textContent='Done'">Pause</button><output>Waiting</output>`:`<a id="go" href="/done">Continue</a>`}));
+ await page.goto('http://replaysmith-owned.invalid/');
+ try {const label=scenario==='label change';const w:any={version:1,name:scenario,inputs:{},allowedOrigins:['http://replaysmith-owned.invalid'],steps:[{id:'click',action:'click',target:{selectors:['#go'],evidence:{role:label?'button':'link',name:label?'Pause':'Continue'}}},{id:'check',action:'assert',assertion:label?{kind:'text',value:'Done',target:{selectors:['output'],evidence:{tag:'output'}}}:{kind:'url',value:'http://replaysmith-owned.invalid/done'}}]};const report=await runOnPage(page,w,{timeoutMs:3000});assert.equal(report.status,'passed',JSON.stringify(report));assert.equal(report.verified,true);assert.equal(report.steps.length,2);assert.equal(report.steps[0].identityObservation,label?'changed':'unobservable');}finally{await context.close();await browser.close()}
+});

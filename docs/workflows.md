@@ -76,3 +76,57 @@ The skill export creates `exported-skills/<workflow-slug>/`, with a matching `SK
 Re-export after changing the workflow or upgrading ReplaySmith: each export freezes that version's behavior.
 
 For slower pages, CLI replay and both exported scripts accept `--timeout-ms 15000`. The default operation timeout is 5000 milliseconds; valid integer values are 100 through 60000. A timeout remains a failure or safe abstention, never successful verification. API users can set `timeoutMs` in run options.
+
+The budget belongs to one step, not to each retry: selector inspection, recovery,
+readiness, the browser action and assertion polling share the original deadline.
+The next step gets its own budget. An expired resolution abstains without acting;
+an action that has already been dispatched can fail after having an effect. Inspect
+the page before retrying a failed action. ReplaySmith never repeats it automatically.
+
+SDK callers can cancel a run without closing a caller-owned page:
+
+```ts
+import { runOnPage } from 'replaysmith';
+
+const controller = new AbortController();
+const pending = runOnPage(page, workflow, {
+  timeoutMs: 5000,
+  signal: controller.signal,
+});
+// Call from the caller's Stop handler when cancellation is requested:
+controller.abort();
+const report = await pending;
+```
+
+Cancellation before dispatch abstains. Cancellation during a browser action fails
+conservatively and cancels Playwright's pending operation, but does not undo an
+already committed click, request or input. Cancellation reasons are not included
+in reports. Already-running page JavaScript and browser reads without native
+cancellation support may finish after the deadline; the runtime rechecks the budget
+before any subsequent action or successful verification. The timeout is therefore
+an action/verification boundary, not a guarantee of exact wall-clock return time.
+
+Input actions retain one exact DOM node after resolution and readiness. Playwright
+can wait and retry on that node, but cannot silently switch to a replacement with
+the same selector. Native actionability checks revalidate the recorded identity
+evidence and consequential-action permission while click, fill and select wait.
+The temporary native handler and node handle are released before the step ends;
+caller-owned handlers are retained. Keyboard press is checked immediately before
+its exact-node dispatch; it has no inner actionability retry loop.
+
+These checks are not an atomic browser transaction. They do not cover every
+possible page mutation after the final native check, changes not distinguished by
+the recorded evidence, or the effects of already-dispatched input events.
+
+Cancellation also reaches the navigation guard's separate fetch. Cleanup stops
+new owned work, waits for its active handlers and disposes fetched responses;
+a stopped guard does not start response fulfillment. Caller pages and contexts
+are not closed. An already-dispatched navigation is not rolled back: cancelling
+its wait does not promise the page will remain unchanged, and inspecting the page
+immediately after cancellation cannot establish that it will never change later.
+
+### Native action identity observation
+
+Native browser actions have pre-dispatch checks, followed by a separate observation of the selected element where available. Completed element actions that reach the observation stage report `identityObservation`: `matched`, `changed`, or `unobservable`. Navigation steps and actions that fail before that stage omit it. Changed evidence is ambiguous: the action itself may have changed the element, or a different action may have occurred. The workflow continues without pausing for review, so later actions can run before this warning is inspected. Inspect the page before deciding whether to retry. Navigation or detachment may make the element unobservable.
+
+These observations are not atomic with dispatch and cannot guarantee the target or undo an effect. `verified` means the workflow's explicit outcome assertions passed; it does not verify target identity. Generated standalone and Agent Skill exports use the same runtime and limits. A known native action race can produce a wrong effect between the precheck and dispatch.

@@ -54,6 +54,8 @@ export interface StepResult {
   strategy?: 'selector' | 'semantic' | 'recovery';
   message?: string;
   candidates?: Candidate[];
+  /** Post-action evidence only; it does not prove the target at dispatch. */
+  identityObservation?: 'matched' | 'changed' | 'unobservable';
 }
 export interface RunResult {
   workflow: string;
@@ -67,6 +69,8 @@ export interface RunOptions {
   headless?: boolean;
   allowSensitive?: boolean;
   timeoutMs?: number;
+  /** Cancel pending resolution or a browser action without closing the caller's page. */
+  signal?: AbortSignal;
   recovery?: boolean;
   /** Restrict baseline resolution for reproducible comparisons. */
   strategy?: 'selector' | 'semantic' | 'heuristic' | 'recovery';

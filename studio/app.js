@@ -284,7 +284,7 @@ async function runWorkflow() {
     state.report = data.result || data;
     $('report-indicator').hidden = false;
     $('workflow-status').className = `status-badge ${state.report.status}`;
-    $('workflow-status').textContent = state.report.status === 'passed' && state.report.verified ? 'Verified' : statusNames[state.report.status] || state.report.status;
+    $('workflow-status').textContent = state.report.status === 'passed' && state.report.verified ? 'Outcome verified' : statusNames[state.report.status] || state.report.status;
     $('footer-state').textContent = state.report.verified ? 'Run complete · outcome verified' : `Run complete · ${state.report.status}${state.report.status === 'passed' ? ' · no outcome checks' : ''}`;
     renderSteps(); renderReport(); switchView('report');
   } catch (error) { markUnrun(); showNotice(`The run could not complete. ${errorMessage(error)}`, 'error'); }
@@ -298,12 +298,13 @@ function renderReport() {
   const recovered = result.steps.filter((step) => step.status === 'recovered').length;
   const passed = result.steps.filter((step) => ['passed', 'recovered'].includes(step.status)).length;
   const title = result.status === 'passed' ? result.verified ? 'The outcome checks passed.' : 'Steps passed. Outcome unverified.' : result.status === 'abstained' ? 'Stopped before an uncertain action.' : 'A step needs your attention.';
-  const explanation = result.status === 'passed' ? result.verified ? 'Every executed step completed and the workflow’s explicit checks succeeded.' : 'Add an outcome check to confirm that these actions achieved the intended result.' : result.status === 'abstained' ? 'Review the evidence below. Refine the target or workflow before running again.' : 'Inspect the first failed step, update the workflow, and run it again.';
+  const explanation = result.status === 'passed' ? result.verified ? 'Every executed step completed and the workflow’s explicit checks succeeded. Checks do not prove which target received an action; native dispatch is not atomic with identity checks.' : 'Add an outcome check to confirm that these actions achieved the intended result.' : result.status === 'abstained' ? 'Review the evidence below. Refine the target or workflow before running again.' : 'Inspect the first failed step, update the workflow, and run it again.';
   const metrics = node('div', { class: 'report-metrics' }, ...[[`${passed}/${state.workflow.steps.length}`, 'Steps passed'], [String(recovered), 'Recovered'], [formatDuration(result.durationMs), 'Total time']].map(([value, label]) => node('div', { class: 'metric' }, node('strong', { text: value }), node('span', { text: label }))));
   const list = node('ol', { class: 'report-step-list' });
   result.steps.forEach((item, index) => {
     const step = state.workflow.steps.find((entry) => entry.id === item.id);
     const li = node('li', { class: 'report-step' }, node('div', { class: 'report-step-heading' }, node('span', { class: 'report-step-number', text: String(index + 1).padStart(2, '0') }), node('div', { class: 'report-step-text' }, node('strong', { text: step ? stepTitle(step) : item.id }), node('small', { text: `${item.action}${item.strategy ? ` · ${item.strategy}` : ''}` })), node('span', { class: `result-tag ${item.status}`, text: statusNames[item.status] || item.status }), node('span', { class: 'report-step-time', text: formatDuration(item.durationMs) })));
+    if (item.identityObservation) li.append(node('p', { class: 'report-message', text: `Post-action target evidence: ${item.identityObservation}. This observation cannot guarantee target identity at dispatch.` }));
     if (item.message) li.append(node('p', { class: 'report-message', text: item.message }));
     if (item.candidates?.length) {
       const candidates = node('div', { class: 'candidate-list' }, ...item.candidates.map((candidate, candidateIndex) => node('article', { class: 'candidate' }, node('div', { class: 'candidate-head' }, node('strong', { text: candidate.evidence.name || candidate.evidence.text || candidate.evidence.label || `Candidate ${candidateIndex + 1}` }), node('span', { class: 'candidate-score', text: `score ${Number(candidate.score).toFixed(2)}` })), node('p', { class: 'candidate-reasons', text: candidate.reasons.join(' · ') }), node('pre', { class: 'candidate-evidence', text: JSON.stringify(candidate.evidence, null, 2) }))));

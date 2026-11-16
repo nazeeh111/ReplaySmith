@@ -49,8 +49,10 @@ A selector can still match after it has become the wrong target. ReplaySmith che
 
 - **Inspectable recovery.** Candidate scores include the evidence that contributed. Recovery requires a score of at least `0.78` and a lead of `0.12`. These are deterministic heuristics, not probabilities or a trained model.
 - **Permission before consequential actions.** Marked sensitive actions, detected consequential targets, and form submissions require explicit permission and a matching recorded selector. They never use recovery.
-- **A safe stopping point.** Weak, missing, disabled, or ambiguous targets cause abstention. A failed outcome does not repeat the preceding click.
-- **Portable behavior.** Generated Playwright and Agent Skill scripts run without ReplaySmith and retain its safety and verification logic.
+- **Checks before dispatch.** Weak, missing, disabled, or ambiguous targets found during admission cause abstention. A failed outcome does not repeat the preceding click.
+- **Portable behavior.** Generated Playwright and Agent Skill scripts run without ReplaySmith and retain its admission checks, diagnostic observations and outcome checks.
+
+The semantic identity check and browser action are separate operations. A page can change between them, so an action can affect the wrong target even when its outcome assertion passes. Post-action identity observations are diagnostic and do not stop later actions. `verified` describes outcome checks, not target identity at dispatch.
 
 Semantic locators and self-healing automation already exist. ReplaySmith's focus is a small, editable artifact and a bounded local resolver whose decision you can inspect. See the [primary-source research](docs/research.md) for comparisons with Playwright, Puppeteer Replay, workflow-use, Browser Use, Stagehand, and others.
 
@@ -73,7 +75,7 @@ replaysmith export task.json --format playwright -o workflow.mjs
 replaysmith export task.json --format skill -o exported-skills
 ```
 
-Output paths must be new; existing files are never silently overwritten. Run exit codes are `0` for a verified outcome, `2` for abstention or an unverified run, and `1` for failure or invalid input. Secret runtime inputs can be passed as JSON through `--inputs-stdin`. Slower pages can use `--timeout-ms 15000` with CLI replay or either exported script (default 5000 ms; range 100–60000).
+Output paths must be new; existing files are never silently overwritten. Run exit codes are `0` for a verified outcome, `2` for abstention or an unverified run, and `1` for failure or invalid input. Exit `0` does not establish that the intended target received the action. Secret runtime inputs can be passed as JSON through `--inputs-stdin`. Slower pages can use `--timeout-ms 15000` with CLI replay or either exported script (default 5000 ms; range 100–60000).
 
 The [workflow guide](docs/workflows.md) covers input preparation, meaningful assertions, sensitive actions, reports, and exports. [Example workflows](examples/) include an ordinary run, changed IDs, and a reused-ID trap on the local demo page.
 

@@ -304,6 +304,8 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
     }
   };
   let finalStatus: RunResult['status'] = 'passed';
+  // Assertions can describe the resulting page but cannot clear this uncertainty.
+  let uncertainAction: { id: string; observation: 'changed' | 'unobservable' } | undefined;
   try {
     for (const step of workflow.steps) {
       const stepStarted = Date.now();
@@ -313,9 +315,12 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
       let result: StepResult = { id: step.id, action: step.action, status: 'passed', durationMs: 0 };
       try {
         remaining();
-        if (step.action !== 'navigate' && !originAllowed(page.url())) throw new Error('origin');
-        if (blockedNavigation) throw new Error('origin');
-        if (step.action === 'navigate') {
+        if (uncertainAction && step.action !== 'assert') {
+          result = { ...result, status: 'abstained', message: `An earlier action (${uncertainAction.id}) was dispatched and its target identity was ${uncertainAction.observation}; this action was not taken. Inspect page state before continuing.` };
+        } else if (step.action !== 'navigate' && !originAllowed(page.url())) throw new Error('origin');
+        if (result.status === 'abstained') { /* Preserve the uncertainty barrier without dispatching this step. */ }
+        else if (blockedNavigation) throw new Error('origin');
+        else if (step.action === 'navigate') {
           const url = interpolate(step.url!);
           if (!originAllowed(url)) throw new Error('origin');
           const actionOptions = browserOptions();
@@ -348,6 +353,7 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
               if (step.action !== 'assert') {
                 const observation = await performOwnedAction(locator, requested, step, resolved.strategy, () => { actionStarted = true; });
                 result.identityObservation = observation;
+                if (observation !== 'matched') uncertainAction = { id: step.id, observation };
                 result.message = observation === 'matched'
                   ? 'Target evidence matched after dispatch; this does not prove identity at dispatch.'
                   : observation === 'changed'
@@ -365,6 +371,13 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
                   if (assertion.kind === 'visible') matched = await locator.isVisible();
                   else if (assertion.kind === 'text') matched = ((await locator.textContent(browserOptions())) ?? '').replace(/\s+/g,' ').trim() === expected.replace(/\s+/g,' ').trim();
                   else if (assertion.kind === 'value') matched = await locator.inputValue(browserOptions()) === expected;
+                  else if (assertion.kind === 'checked' || assertion.kind === 'unchecked') {
+                    const state = await locator.evaluate(el => {
+                      if (!(el instanceof HTMLInputElement) || !['checkbox', 'radio'].includes(el.type)) throw new Error('Expected a native checkbox or radio input');
+                      return { checked: el.checked, indeterminate: el.indeterminate };
+                    }, undefined, browserOptions());
+                    matched = !state.indeterminate && state.checked === (assertion.kind === 'checked');
+                  }
                   remaining();
                   if (matched) break;
                   await pause();

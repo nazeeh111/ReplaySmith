@@ -16,7 +16,7 @@ export interface Target {
   evidence: ElementEvidence;
 }
 export interface Assertion {
-  kind: 'visible' | 'text' | 'value' | 'url';
+  kind: 'visible' | 'text' | 'value' | 'url' | 'checked' | 'unchecked';
   target?: Target;
   value?: string;
 }

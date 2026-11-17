@@ -53,7 +53,15 @@ export async function startStudio(port=3333):Promise<StudioServer> {
               if(!body.inputs||typeof body.inputs!=='object'||Array.isArray(body.inputs))throw new Error('Inputs must be an object.');
               for(const [key,value] of Object.entries(body.inputs)) {if(typeof value!=='string'||value.length>10000)throw new Error('Input values must be strings shorter than 10,000 characters.');inputs[key]=value;}
             }
-            busy=true;try{send(200,await runWorkflow(workflow,{inputs,allowSensitive:body.allowSensitive===true,headless:true,timeoutMs:5000}));}finally{busy=false;}
+            busy=true;
+            const run=new AbortController();
+            const abort=()=>run.abort();
+            const disconnected=()=>{if(!res.writableEnded)abort();};
+            controller.signal.addEventListener('abort',abort,{once:true});
+            res.on('close',disconnected);
+            if(controller.signal.aborted||res.destroyed)abort();
+            try{send(200,await runWorkflow(workflow,{inputs,allowSensitive:body.allowSensitive===true,headless:true,timeoutMs:5000,signal:run.signal}));}
+            finally{res.removeListener('close',disconnected);controller.signal.removeEventListener('abort',abort);busy=false;}
             return;
           }
           case '/api/record': {

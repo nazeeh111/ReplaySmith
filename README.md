@@ -20,6 +20,8 @@ replaysmith studio
 
 Open the printed loopback URL, usually `http://127.0.0.1:3333`. The example is a real local form with a saved-note assertion. Change the **note** input and choose **Run workflow**. The report distinguishes actions completing from an outcome being verified.
 
+Studio runs cancel pending resolution when their HTTP client disconnects or Studio shuts down. Cancellation does not undo completed actions or guarantee interruption of an action already dispatched to the browser.
+
 On Linux, install Chromium's OS libraries with `npx playwright install --with-deps chromium` if the browser installer reports missing dependencies. Release packages are hosted on GitHub; this project is not published to the npm registry.
 
 Prefer source?
@@ -36,7 +38,7 @@ npm run studio
 
 1. **Record or import.** Demonstrate in a fresh Chromium window, or import Chrome DevTools Recorder JSON. Captured form values become named input defaults automatically. Unsupported import operations fail visibly.
 2. **Understand and improve.** Inspect every step, locator, fingerprint, origin, and input. Edit the workflow in the studio or as versioned JSON. Mark consequential actions as sensitive.
-3. **Verify and replay.** Add a final text, value, URL, or visibility check that expresses the intended result. Run with new inputs; inspect failures, abstentions, and candidate evidence.
+3. **Verify and replay.** Add a final text, value (including an empty field), URL, visibility, or checkbox/radio state check that expresses the intended result. Run with new inputs; inspect failures, abstentions, and candidate evidence.
 4. **Export.** Download executable Playwright JavaScript or a directory-compatible Agent Skill. The export embeds the same guards, scorer, and outcome checks.
 
 Use **Assert text** while recording to capture a result, then **Stop & review**. Recording is one tab, one origin, with a clean browser profile. It does not attach to your normal signed-in browser.
@@ -52,7 +54,7 @@ A selector can still match after it has become the wrong target. ReplaySmith che
 - **Checks before dispatch.** Weak, missing, disabled, or ambiguous targets found during admission cause abstention. A failed outcome does not repeat the preceding click.
 - **Portable behavior.** Generated Playwright and Agent Skill scripts run without ReplaySmith and retain its admission checks, diagnostic observations and outcome checks.
 
-The semantic identity check and browser action are separate operations. A page can change between them, so an action can affect the wrong target even when its outcome assertion passes. Post-action identity observations are diagnostic and do not stop later actions. `verified` describes outcome checks, not target identity at dispatch.
+The semantic identity check and browser action are separate operations. A page can change between them, so an action can affect the wrong target even when its outcome assertion passes. After a changed or unobservable post-action observation, read-only assertions may run, but the next action is stopped for inspection. A completed single-action workflow can still report an outcome-only verification. `verified` describes outcome checks, not target identity at dispatch.
 
 Semantic locators and self-healing automation already exist. ReplaySmith's focus is a small, editable artifact and a bounded local resolver whose decision you can inspect. See the [primary-source research](docs/research.md) for comparisons with Playwright, Puppeteer Replay, workflow-use, Browser Use, Stagehand, and others.
 

@@ -2,6 +2,7 @@ const $ = (id) => document.getElementById(id);
 const state = { workflow: null, selected: 0, inputs: {}, report: null, busy: false, view: 'workflow', file: '', revision: 0, dirty: false, sourceDirty: false };
 const actionNames = { navigate: 'Open page', click: 'Click element', fill: 'Fill field', select: 'Select option', press: 'Press key', assert: 'Check outcome' };
 const actionIcons = { navigate: '↗', click: '↖', fill: 'Aa', select: '⌄', press: '⌨', assert: '✓' };
+const assertionHasValue = (kind) => ['text', 'value', 'url'].includes(kind);
 const statusNames = { passed: 'Passed', recovered: 'Recovered', abstained: 'Abstained', failed: 'Failed' };
 
 function node(tag, attributes = {}, ...children) {
@@ -106,9 +107,12 @@ function renderEditor() {
   }
   if (step.action === 'press') actionCard.append(field('Key', 'step-key', step.key, { mono: true, placeholder: 'Enter' }));
   if (step.action === 'assert') {
-    const kindSelect = node('select', { id: 'step-assertion-kind', class: 'text-field' }, ...['visible', 'text', 'value', 'url'].map((kind) => node('option', { value: kind, text: { visible: 'Element is visible', text: 'Element text equals', value: 'Field has value', url: 'Page URL' }[kind] })));
+    const kindSelect = node('select', { id: 'step-assertion-kind', class: 'text-field' }, ...['visible', 'text', 'value', 'url', 'checked', 'unchecked'].map((kind) => node('option', { value: kind, text: { visible: 'Element is visible', text: 'Element text equals', value: 'Field has value', url: 'Page URL', checked: 'Checkbox or radio is checked', unchecked: 'Checkbox or radio is unchecked' }[kind] })));
     kindSelect.value = step.assertion?.kind || 'visible';
-    actionCard.append(node('label', { for: 'step-assertion-kind', class: 'field-label', text: 'Outcome check' }), kindSelect, field('Expected value', 'step-assertion-value', step.assertion?.value, { mono: true, hint: 'Required for text, value, and URL checks. Inputs such as {{query}} are supported.' }));
+    const expectedField = field('Expected value', 'step-assertion-value', step.assertion?.value, { mono: true, hint: 'Text and URL need a value. A field value may be empty. Inputs such as {{query}} are supported.' });
+    expectedField.hidden = !assertionHasValue(kindSelect.value);
+    kindSelect.addEventListener('change', () => { expectedField.hidden = !assertionHasValue(kindSelect.value); });
+    actionCard.append(node('label', { for: 'step-assertion-kind', class: 'field-label', text: 'Outcome check' }), kindSelect, expectedField);
   }
   if (step.action !== 'assert' && step.action !== 'navigate') actionCard.append(node('label', { class: 'checkbox-label' }, node('input', { type: 'checkbox', id: 'step-sensitive', checked: step.sensitive }), node('span', { text: 'Mark this action as sensitive (no recovery; explicit permission)' })));
   form.append(actionCard);
@@ -198,7 +202,7 @@ async function saveStep(event) {
       step.assertion ||= {};
       step.assertion.kind = $('step-assertion-kind').value;
       const value = $('step-assertion-value').value;
-      if (step.assertion.kind === 'visible') delete step.assertion.value; else step.assertion.value = value;
+      if (!assertionHasValue(step.assertion.kind)) delete step.assertion.value; else step.assertion.value = value;
       if (step.assertion.kind === 'url') delete step.assertion.target;
       else step.assertion.target = JSON.parse($('step-target').value);
     } else if ($('step-target')) step.target = JSON.parse($('step-target').value);
@@ -233,15 +237,15 @@ function updateAssertionFields() {
   const kind = $('assertion-kind').value;
   $('assertion-selector-field').hidden = kind === 'url';
   $('assertion-selector').required = kind !== 'url';
-  $('assertion-value-field').hidden = kind === 'visible';
-  $('assertion-value').required = kind !== 'visible';
+  $('assertion-value-field').hidden = !assertionHasValue(kind);
+  $('assertion-value').required = kind === 'text' || kind === 'url';
   $('assertion-value').placeholder = kind === 'url' ? 'https://example.com/success' : 'Saved successfully';
 }
 async function addAssertion(event) {
   event.preventDefault(); if (!state.workflow || state.busy) return;
   const kind = $('assertion-kind').value, workflow = structuredClone(state.workflow);
   const assertion = { kind };
-  if (kind !== 'visible') assertion.value = $('assertion-value').value;
+  if (assertionHasValue(kind)) assertion.value = $('assertion-value').value;
   if (kind !== 'url') assertion.target = { selectors: [$('assertion-selector').value.trim()], evidence: {} };
   let sequence = workflow.steps.length + 1;
   while (workflow.steps.some((step) => step.id === `check-${sequence}`)) sequence += 1;
@@ -298,7 +302,7 @@ function renderReport() {
   const recovered = result.steps.filter((step) => step.status === 'recovered').length;
   const passed = result.steps.filter((step) => ['passed', 'recovered'].includes(step.status)).length;
   const title = result.status === 'passed' ? result.verified ? 'The outcome checks passed.' : 'Steps passed. Outcome unverified.' : result.status === 'abstained' ? 'Stopped before an uncertain action.' : 'A step needs your attention.';
-  const explanation = result.status === 'passed' ? result.verified ? 'Every executed step completed and the workflow’s explicit checks succeeded. Checks do not prove which target received an action; native dispatch is not atomic with identity checks.' : 'Add an outcome check to confirm that these actions achieved the intended result.' : result.status === 'abstained' ? 'Review the evidence below. Refine the target or workflow before running again.' : 'Inspect the first failed step, update the workflow, and run it again.';
+  const explanation = result.status === 'passed' ? result.verified ? 'Every executed step completed and the workflow’s explicit checks succeeded. Checks do not prove which target received an action; native dispatch is not atomic with identity checks.' : 'Add an outcome check to confirm that these actions achieved the intended result.' : result.status === 'abstained' ? 'Earlier actions may already have occurred. Inspect page state and review the evidence before retrying.' : 'Inspect the first failed step, update the workflow, and run it again.';
   const metrics = node('div', { class: 'report-metrics' }, ...[[`${passed}/${state.workflow.steps.length}`, 'Steps passed'], [String(recovered), 'Recovered'], [formatDuration(result.durationMs), 'Total time']].map(([value, label]) => node('div', { class: 'metric' }, node('strong', { text: value }), node('span', { text: label }))));
   const list = node('ol', { class: 'report-step-list' });
   result.steps.forEach((item, index) => {

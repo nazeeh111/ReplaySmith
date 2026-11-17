@@ -58,12 +58,13 @@ export function validateWorkflow(value: unknown): Workflow {
       const url = httpUrl(step.url, 'navigation URL');
       if (!(value.allowedOrigins as string[]).includes(url.origin)) fail(`navigation origin ${url.origin} is not allowed`);
     } else if (step.action === 'assert') {
-      if (!object(step.assertion) || !['visible', 'text', 'value', 'url'].includes(step.assertion.kind as string)) fail('assert step needs a supported assertion');
+      if (!object(step.assertion) || !['visible', 'text', 'value', 'url', 'checked', 'unchecked'].includes(step.assertion.kind as string)) fail('assert step needs a supported assertion');
       if (step.assertion.kind !== 'url') target(step.assertion.target, 'assertion target');
-      if (step.assertion.kind !== 'visible') {
+      if (['text', 'value', 'url'].includes(step.assertion.kind as string)) {
         text(step.assertion.value, 'assertion value');
-        if (!step.assertion.value) fail('assertion value cannot be empty');
+        if (step.assertion.kind !== 'value' && !step.assertion.value) fail('assertion value cannot be empty');
       }
+      if (['checked', 'unchecked'].includes(step.assertion.kind as string) && step.assertion.value !== undefined) fail('checked state assertions do not use a value');
       if (step.assertion.kind === 'url') {
         const url = httpUrl(step.assertion.value, 'assertion URL');
         if (!(value.allowedOrigins as string[]).includes(url.origin)) fail('assertion URL origin is not allowed');

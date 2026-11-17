@@ -1,7 +1,7 @@
 {
   "name": "replaysmith",
-  "version": "0.1.1",
-  "description": "Show it once. Run it reliably. Local browser workflows with evidence-backed recovery and verified outcomes.",
+  "version": "0.1.2-dev.0",
+  "description": "Local recorded browser workflows with explicit outcome checks and inspectable target recovery.",
   "type": "module",
   "license": "MIT",
   "author": "Nazeeh (nazeeh111)",
@@ -36,7 +36,10 @@
     "studio",
     "examples",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "TECHNICAL_GUIDE.md",
+    "VERIFICATION.md",
+    "assets/source-preview"
   ],
   "scripts": {
     "build": "tsc",

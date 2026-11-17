@@ -2,29 +2,15 @@
 
 **Record a browser task. Replay it with a checked outcome.**
 
-Turn a demonstration into an editable workflow with inputs, bounded target recovery and an explicit result check. Inspect each decision, then export the behavior as Playwright code or an Agent Skill. Runs locally without a model or API key.
+Build an editable workflow from a demonstration or Chrome DevTools Recorder file. Change its inputs, inspect target recovery, check the result, then export the same behavior as Playwright code or an Agent Skill. Runs locally with Chromium, without a model or API key.
 
-![Actual ReplaySmith studio demonstration](assets/demo.gif)
+![ReplaySmith studio with the recorded dispatch workflow, target evidence and editable run input](assets/source-preview/workflow-desktop.png)
 
-[Try the local example](#try-it-in-two-minutes) · [Download](https://github.com/nazeeh111/ReplaySmith/releases/latest) · [Workflow guide](docs/workflows.md) · [Benchmarks](docs/benchmarks.md) · [Prior art](docs/research.md) · [Contribute](CONTRIBUTING.md)
+## Try the source preview
 
-## Try it in two minutes
+This checkout is **0.1.2-dev.0**, an unreleased source preview. The existing published package is [v0.1.1](https://github.com/nazeeh111/ReplaySmith/releases/tag/v0.1.1); that release and its benchmark packet are separate artifacts.
 
-Requires **Node.js 22+** on macOS, Linux, or Windows. The release contains the built CLI and studio; you do not need a compiler.
-
-```sh
-npm install --global https://github.com/nazeeh111/ReplaySmith/releases/download/v0.1.1/replaysmith-0.1.1.tgz
-replaysmith install-browser
-replaysmith studio
-```
-
-Open the printed loopback URL, usually `http://127.0.0.1:3333`. The example is a real local form with a saved-note assertion. Change the **note** input and choose **Run workflow**. The report distinguishes actions completing from an outcome being verified.
-
-Studio runs cancel pending resolution when their HTTP client disconnects or Studio shuts down. Cancellation does not undo completed actions or guarantee interruption of an action already dispatched to the browser.
-
-On Linux, install Chromium's OS libraries with `npx playwright install --with-deps chromium` if the browser installer reports missing dependencies. Release packages are hosted on GitHub; this project is not published to the npm registry.
-
-Prefer source?
+Requires **Node.js 22 or later**.
 
 ```sh
 git clone https://github.com/nazeeh111/ReplaySmith.git
@@ -34,107 +20,55 @@ npx playwright install chromium
 npm run studio
 ```
 
-## Demonstration → dependable replay
+Open the printed loopback URL. The built-in example opens a real local form: change the **note** input and choose **Run workflow**. The report distinguishes completed actions from a verified outcome. On Linux, use Playwright's `--with-deps` browser installation option if it reports missing system libraries.
 
-1. **Record or import.** Demonstrate in a fresh Chromium window, or import Chrome DevTools Recorder JSON. Captured form values become named input defaults automatically. Unsupported import operations fail visibly.
-2. **Understand and improve.** Inspect every step, locator, fingerprint, origin, and input. Edit the workflow in the studio or as versioned JSON. Mark consequential actions as sensitive.
-3. **Verify and replay.** Add a final text, value (including an empty field), URL, visibility, or checkbox/radio state check that expresses the intended result. Run with new inputs; inspect failures, abstentions, and candidate evidence.
-4. **Export.** Download executable Playwright JavaScript or a directory-compatible Agent Skill. The export embeds the same guards, scorer, and outcome checks.
+## Demonstration to reusable workflow
 
-Use **Assert text** while recording to capture a result, then **Stop & review**. Recording is one tab, one origin, with a clean browser profile. It does not attach to your normal signed-in browser.
+1. **Record or import.** Record a task in a fresh browser, or import supported Chrome Recorder JSON. Captured form values become named input defaults.
+2. **Edit and check.** Inspect steps, targets and origins. Change inputs per run. Add an explicit outcome check for text, visibility, URL, field value, or native checkbox/radio state. A field-value check can intentionally expect an empty string.
+3. **Run and inspect.** Review the action results, recovery evidence and final checks. Missing, ambiguous or conflicting evidence can cause abstention. A failed outcome does not automatically repeat the preceding action.
+4. **Export.** Download workflow JSON, a standalone Playwright script, or an Agent Skill ZIP. Executable exports retain the resolver, admission checks, continuation barrier and outcome checks.
 
-![ReplaySmith workflow studio](assets/studio.png)
+Runtime input overrides remain separate from the recorded defaults. Review both before sharing a workflow. Output paths must be new; the CLI refuses existing files.
 
-## Built for the second run
+## Use the CLI
 
-A selector can still match after it has become the wrong target. ReplaySmith checks its available semantic evidence before acting. If that selector no longer fits, it tries exact semantic locators, then ranks visible candidates using role, name, label, input type, test ID, text, and named surrounding context.
-
-- **Inspectable recovery.** Candidate scores include the evidence that contributed. Recovery requires a score of at least `0.78` and a lead of `0.12`. These are deterministic heuristics, not probabilities or a trained model.
-- **Permission before consequential actions.** Marked sensitive actions, detected consequential targets, and form submissions require explicit permission and a matching recorded selector. They never use recovery.
-- **Checks before dispatch.** Weak, missing, disabled, or ambiguous targets found during admission cause abstention. A failed outcome does not repeat the preceding click.
-- **Portable behavior.** Generated Playwright and Agent Skill scripts run without ReplaySmith and retain its admission checks, diagnostic observations and outcome checks.
-
-The semantic identity check and browser action are separate operations. A page can change between them, so an action can affect the wrong target even when its outcome assertion passes. After a changed or unobservable post-action observation, read-only assertions may run, but the next action is stopped for inspection. A completed single-action workflow can still report an outcome-only verification. `verified` describes outcome checks, not target identity at dispatch.
-
-Semantic locators and self-healing automation already exist. ReplaySmith's focus is a small, editable artifact and a bounded local resolver whose decision you can inspect. See the [primary-source research](docs/research.md) for comparisons with Playwright, Puppeteer Replay, workflow-use, Browser Use, Stagehand, and others.
-
-## CLI that stays out of the way
+With the studio on its default port 3333:
 
 ```sh
-# With the studio running, use the local example
-replaysmith example -o dispatch.json
-replaysmith run dispatch.json --input note='Ship the calibration kit to Avery.' --report run.json
-
-# Import a supported Chrome Recorder JSON file and inspect the generated inputs
-replaysmith import recording.json -o task.json
-replaysmith inspect task.json
-
-# Or record directly in a fresh browser
-replaysmith record https://example.org -o recorded.json
-
-# Export a frozen executable or an Agent Skill directory
-replaysmith export task.json --format playwright -o workflow.mjs
-replaysmith export task.json --format skill -o exported-skills
+node dist/cli.js example -o dispatch.json
+node dist/cli.js run dispatch.json --input note='Send the calibration kit to Avery.' --report run.json
+node dist/cli.js inspect dispatch.json
+node dist/cli.js export dispatch.json --format playwright -o workflow.mjs
+node dist/cli.js export dispatch.json --format skill -o exported-skills
 ```
 
-Output paths must be new; existing files are never silently overwritten. Run exit codes are `0` for a verified outcome, `2` for abstention or an unverified run, and `1` for failure or invalid input. Exit `0` does not establish that the intended target received the action. Secret runtime inputs can be passed as JSON through `--inputs-stdin`. Slower pages can use `--timeout-ms 15000` with CLI replay or either exported script (default 5000 ms; range 100–60000).
+For another studio port, pass its printed origin to `example --origin`. Import recordings with `import recording.json -o task.json`, or use `record <url> -o task.json` to demonstrate directly. Secret runtime values can use `--inputs-stdin`; the [full guide](https://github.com/nazeeh111/ReplaySmith/blob/main/TECHNICAL_GUIDE.md) covers supported options and formats.
 
-The [workflow guide](docs/workflows.md) covers input preparation, meaningful assertions, sensitive actions, reports, and exports. [Example workflows](examples/) include an ordinary run, changed IDs, and a reused-ID trap on the local demo page.
+| Run exit | Meaning |
+| --- | --- |
+| `0` | Explicit outcome checks passed |
+| `2` | Abstained or outcome unverified |
+| `1` | Failed step, invalid input or output-path error |
 
-## Tested on public websites
+![Actual four-step run report with the outcome verified and target-identity limitation visible](assets/source-preview/run-report.png)
 
-The v0.1.1 fixes were exercised on TodoMVC, Books to Scrape, The Internet, and the production Python and Playwright documentation sites. Native recordings, changed inputs, actual page outcomes, controlled local DOM changes, and both executable export formats are checked. See the [live-site report](docs/real-websites.md) for exact tasks, evidence, and limits.
+[Mobile editor](assets/source-preview/workflow-mobile.png) · [Capture details](assets/source-preview/CAPTURES.md)
 
-From a source checkout:
+## What the checks mean
 
-```sh
-npm run test:live
-# Or preserve a named, new output directory
-npm run test:live -- --out artifacts/live-web/my-run
-```
+A checked outcome does **not** establish which target received an action. Target checks and native browser dispatch are separate operations; a page can change between them. Changed or unobservable evidence after an action stops the next action for inspection, while read-only outcome checks may continue.
 
-This is an explicit network smoke test, separate from deterministic CI. It uses fresh browser profiles and read-only or browser-local tasks. External changes or outages fail the run rather than being counted as successes. Recovery mutations affect only the isolated browser DOM or recorded selectors, not the hosted websites.
+Marked or detected sensitive steps require permission and an exact recorded selector, and do not use recovery. Sensitive detection is an aid, not a complete classifier. Origin lists constrain navigation, not every page resource or network request. Workflows are executable instructions: inspect them before running them.
 
-## Measured, with limits
+The studio cancels pending runs when their request disconnects or the server closes. Already dispatched actions may have occurred; cancellation is not a rollback or an atomic target-identity guarantee.
 
-<p align="center">
-  <a href="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml"><img src="https://github.com/nazeeh111/ReplaySmith/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/nazeeh111/ReplaySmith/releases"><img src="https://img.shields.io/github/v/release/nazeeh111/ReplaySmith?color=e8532d" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-637354" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/Node.js-22%2B-637354" alt="Node.js 22 or later">
-</p>
+## Verification and technical detail
 
-The [published benchmark](docs/benchmarks.md) uses **11 controlled local scenarios, four policies, and three repetitions: 132 real Chromium trials**. It reads the fixture's actual saved value and wrong-action counters independently of the run report. Every policy uses the normal 5000 ms operation budget; semantic playback is an ordinary exact Playwright locator baseline. An earlier 900 ms run is preserved and explained in the report.
+See [VERIFICATION.md](VERIFICATION.md) for the source, package, native studio, recorder and independently observed local-save checks, including failed and incomplete probes. The original technical guide, recorded benchmark data, prior live-site reports and media remain preserved. They retain their original scope and do not become measurements of this preview.
 
-| Policy | Changed tasks completed | Wrong-action trials | Safe stops on refusal cases |
-| --- | ---: | ---: | ---: |
-| Recorded selectors | 0 / 15 | 3 / 33 | 12 / 12 |
-| Exact semantic locators | 12 / 15 | 0 / 33 | 12 / 12 |
-| First-match text heuristic | 12 / 15 | 6 / 33 | 6 / 12 |
-| ReplaySmith | 15 / 15 | 0 / 33 | 12 / 12 |
+The resolver uses deterministic evidence weights, not learned probabilities. Its recorded threshold and margin, supported mutations, benchmark limitations and prior-art comparisons are in the [technical guide](https://github.com/nazeeh111/ReplaySmith/blob/main/TECHNICAL_GUIDE.md), [workflow documentation](https://github.com/nazeeh111/ReplaySmith/blob/main/docs/workflows.md) and [core boundaries](https://github.com/nazeeh111/ReplaySmith/blob/main/docs/core-notes.md).
 
-ReplaySmith explicitly abstained in all 12 refusal trials and rejected the corrupted outcome in all three trials. Baseline safe stops include strict-locator errors and timeouts; these are safety successes too. The simple heuristic sometimes clicked a decoy, which the wrong-action metric exposes even when click execution succeeds. Completion alone is insufficient.
+Chromium and one-page workflows are supported. Frames, multiple tabs, file transfers, drag-and-drop and arbitrary imported JavaScript are outside this version's scope. See [SECURITY.md](https://github.com/nazeeh111/ReplaySmith/blob/main/SECURITY.md) before private or consequential work.
 
-This developer-authored suite is synthetic, small, and not held out. It demonstrates these supported mutations, not arbitrary website reliability or superiority over complete competitor products. It also publishes timing overhead: the guarded resolver is generally slower than an exact locator on the unchanged fixture. Read the [raw results](benchmarks/results.json), [method](docs/benchmarks.md), and [runner](benchmarks/run.ts).
-
-```sh
-npm test
-npm run bench                       # three repetitions; writes fresh results
-npm run bench -- --repetitions 1    # shorter local/CI check
-```
-
-## What v0.1 supports
-
-Supports Chromium, native/ARIA element interactions, one-page workflows, explicit inputs, bounded semantic recovery, and exact outcome assertions. Chrome Recorder import supports navigation, primary element clicks, changes, simple key presses, and navigation assertions.
-
-It does not support frames, multiple tabs, file transfers, drag-and-drop, shadow-host selector chains, arbitrary JavaScript imports, or arbitrary synonym/redesign recovery. HTTP navigation redirects are blocked in this release. Accessible-name evidence is an approximation, not the complete WAI-ARIA algorithm. See [core boundaries](docs/core-notes.md).
-
-Workflows are executable instructions. Review them and their origin list before running. Origin checks constrain navigation; page scripts and subresources can still make other network requests. Automatic sensitive detection and secret masking are aids, not complete classifiers. See [SECURITY.md](SECURITY.md) before handling private or consequential tasks.
-
-## Under the hood
-
-![ReplaySmith architecture](assets/architecture.svg)
-
-One TypeScript/Node library, Playwright, and a dependency-free studio. No second browser framework, database, orchestration platform, model download, or custom ML. The [architecture note](docs/architecture.md) maps the diagram to source modules. The [launch composition](demo/) and [capture script](scripts/capture-demo.ts) preserve how the demo was made.
-
-MIT licensed. Reproducible bug reports and focused changes are welcome through [issues](https://github.com/nazeeh111/ReplaySmith/issues) and [contributions](CONTRIBUTING.md).
+[MIT license](LICENSE) · [Contributing](https://github.com/nazeeh111/ReplaySmith/blob/main/CONTRIBUTING.md)

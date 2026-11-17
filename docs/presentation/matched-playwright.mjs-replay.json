@@ -1,0 +1,46 @@
+{
+  "workflow": "matched continuation witness",
+  "status": "passed",
+  "verified": true,
+  "durationMs": 133,
+  "steps": [
+    {
+      "id": "open",
+      "action": "navigate",
+      "status": "passed",
+      "durationMs": 14
+    },
+    {
+      "id": "first",
+      "action": "click",
+      "status": "passed",
+      "durationMs": 61,
+      "strategy": "selector",
+      "identityObservation": "matched",
+      "message": "Target evidence matched after dispatch; this does not prove identity at dispatch."
+    },
+    {
+      "id": "receipt",
+      "action": "assert",
+      "status": "passed",
+      "durationMs": 7,
+      "strategy": "selector"
+    },
+    {
+      "id": "later",
+      "action": "click",
+      "status": "passed",
+      "durationMs": 43,
+      "strategy": "selector",
+      "identityObservation": "matched",
+      "message": "Target evidence matched after dispatch; this does not prove identity at dispatch."
+    },
+    {
+      "id": "final",
+      "action": "assert",
+      "status": "passed",
+      "durationMs": 6,
+      "strategy": "selector"
+    }
+  ]
+}

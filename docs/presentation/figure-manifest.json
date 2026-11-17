@@ -1,0 +1,9 @@
+{
+  "source": "execution.json",
+  "sourceSHA256": "bf7d24906eba68456a53da31824b9d4607354c89fb5b563aea0bd8dec11bc3ae",
+  "meaning": "Exact one-run native counters. Export cumulative counters remain separate. No spatial or time measurement axis.",
+  "figures": {
+    "continuation.svg": "90b8c6d4c11e27909e47eb67d444a173050ebf97a68a44092a54700856868797",
+    "continuation-mobile.svg": "7c2218cc3d1fbd44804f1078a263b481dd7892c29fb8625ac9ae041e9aa2609a"
+  }
+}

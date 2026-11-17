@@ -1,5 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const state = { workflow: null, selected: 0, inputs: {}, report: null, busy: false, view: 'workflow', file: '', revision: 0, dirty: false, sourceDirty: false };
+let activeRun = null;
 const actionNames = { navigate: 'Open page', click: 'Click element', fill: 'Fill field', select: 'Select option', press: 'Press key', assert: 'Check outcome' };
 const actionIcons = { navigate: '↗', click: '↖', fill: 'Aa', select: '⌄', press: '⌨', assert: '✓' };
 const assertionHasValue = (kind) => ['text', 'value', 'url'].includes(kind);
@@ -28,8 +29,8 @@ function showNotice(message, kind = 'info') {
   notice.hidden = false;
 }
 function errorMessage(error) { return error instanceof Error ? error.message : String(error); }
-async function request(path, body) {
-  const response = await fetch(path, { method: body === undefined ? 'GET' : 'POST', headers: body === undefined ? {} : { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
+async function request(path, body, signal) {
+  const response = await fetch(path, { signal, method: body === undefined ? 'GET' : 'POST', headers: body === undefined ? {} : { 'Content-Type': 'application/json' }, body: body === undefined ? undefined : JSON.stringify(body) });
   let data;
   try { data = await response.json(); } catch { throw new Error(`The local server returned an unreadable response (${response.status}).`); }
   if (!response.ok) throw new Error(typeof data.error === 'string' ? data.error : data.error?.message || data.message || `Request failed (${response.status}).`);
@@ -280,19 +281,33 @@ async function runWorkflow() {
   if (!state.workflow || state.busy) return;
   if (state.dirty && !await saveStep()) return;
   if (state.sourceDirty && !await applySource()) return;
+  const controller = new AbortController();
+  activeRun = controller;
+  $('cancel-run-button').hidden = false;
+  $('cancel-run-button').disabled = false;
   setBusy(true, 'Executing in a fresh local browser…');
   $('workflow-status').className = 'status-badge running'; $('workflow-status').textContent = 'Running';
   $('notice').hidden = true;
   try {
-    const data = await request('/api/run', { workflow: state.workflow, inputs: state.inputs, allowSensitive: $('allow-sensitive').checked });
+    const data = await request('/api/run', { workflow: state.workflow, inputs: state.inputs, allowSensitive: $('allow-sensitive').checked }, controller.signal);
+    if (controller.signal.aborted) return;
     state.report = data.result || data;
     $('report-indicator').hidden = false;
     $('workflow-status').className = `status-badge ${state.report.status}`;
     $('workflow-status').textContent = state.report.status === 'passed' && state.report.verified ? 'Outcome verified' : statusNames[state.report.status] || state.report.status;
     $('footer-state').textContent = state.report.verified ? 'Run complete · outcome verified' : `Run complete · ${state.report.status}${state.report.status === 'passed' ? ' · no outcome checks' : ''}`;
     renderSteps(); renderReport(); switchView('report');
-  } catch (error) { markUnrun(); showNotice(`The run could not complete. ${errorMessage(error)}`, 'error'); }
-  finally { setBusy(false); }
+  } catch (error) {
+    markUnrun(); renderSteps(); renderReport();
+    if (controller.signal.aborted) {
+      $('workflow-status').textContent = 'Cancelled';
+      $('footer-state').textContent = 'Run cancelled · inspect page state before retrying';
+      showNotice('Run cancelled. Earlier actions may already have occurred. Cancellation is not rollback. Inspect page state before retrying.');
+    } else showNotice(`The run could not complete. ${errorMessage(error)}`, 'error');
+  } finally {
+    activeRun = null; $('cancel-run-button').hidden = true; setBusy(false);
+    $('run-button').focus();
+  }
 }
 function formatDuration(durationMs) { return durationMs >= 1000 ? `${(durationMs / 1000).toFixed(2)}s` : `${Math.round(durationMs)}ms`; }
 function renderReport() {
@@ -376,6 +391,7 @@ async function exportFormat(format) {
   finally { for (const control of document.querySelectorAll('.export-option')) control.disabled = false; }
 }
 
+$('cancel-run-button').addEventListener('click', () => { if (!activeRun) return; $('cancel-run-button').disabled = true; activeRun.abort(); });
 $('example-button').addEventListener('click', loadExample);
 $('empty-example-button')?.addEventListener('click', loadExample);
 $('import-button').addEventListener('click', () => $('file-input').click());

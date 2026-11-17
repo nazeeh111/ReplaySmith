@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "name": "changed continuation witness",
+  "inputs": {},
+  "allowedOrigins": [
+    "http://127.0.0.1:54097"
+  ],
+  "steps": [
+    {
+      "id": "open",
+      "action": "navigate",
+      "url": "http://127.0.0.1:54097/?kind=changed",
+      "description": "Open the owned changed fixture"
+    },
+    {
+      "id": "first",
+      "action": "click",
+      "description": "Pause the fixture",
+      "target": {
+        "selectors": [
+          "#first"
+        ],
+        "evidence": {
+          "role": "button",
+          "name": "Pause"
+        }
+      }
+    },
+    {
+      "id": "receipt",
+      "action": "assert",
+      "description": "Read the Done receipt",
+      "assertion": {
+        "kind": "text",
+        "value": "Done",
+        "target": {
+          "selectors": [
+            "output"
+          ],
+          "evidence": {
+            "tag": "output"
+          }
+        }
+      }
+    },
+    {
+      "id": "later",
+      "action": "click",
+      "description": "Continue to the next action",
+      "target": {
+        "selectors": [
+          "#later"
+        ],
+        "evidence": {
+          "role": "button",
+          "name": "Next"
+        }
+      }
+    },
+    {
+      "id": "final",
+      "action": "assert",
+      "description": "Check the later effect",
+      "assertion": {
+        "kind": "text",
+        "value": "Next completed",
+        "target": {
+          "selectors": [
+            "#final"
+          ],
+          "evidence": {
+            "tag": "p"
+          }
+        }
+      }
+    }
+  ]
+}

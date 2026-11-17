@@ -6,6 +6,17 @@ Build an editable workflow from a demonstration or Chrome DevTools Recorder file
 
 ![ReplaySmith studio with the recorded dispatch workflow, target evidence and editable run input](assets/source-preview/workflow-desktop.png)
 
+## A receipt passes. The next action waits.
+
+In the [owned continuation witness](docs/presentation/README.md), clicking **Pause** changes its target evidence and produces a **Done** receipt. The read-only receipt check passes, but ReplaySmith withholds **Next**. The matched control continues. The first effect already happened in both cases. This is a boundary demonstration, not a success rate or proof of identity at dispatch.
+
+<picture>
+  <source media="(max-width: 600px)" srcset="docs/presentation/continuation-mobile.png">
+  <img src="docs/presentation/continuation.png" alt="Two native runs: changed target evidence has first/later effects 1/0 and abstains despite a passed receipt; the matched control has effects 1/1 and passes.">
+</picture>
+
+[Reports and fixture](docs/presentation/README.md) · [Portable worked bundle](docs/presentation/worked-example.zip) · [Actual Studio report](docs/presentation/studio-desktop.png) · [Phone report](docs/presentation/studio-phone.png)
+
 ## Try the source preview
 
 This checkout is **0.1.2-dev.0**, an unreleased source preview. The existing published package is [v0.1.1](https://github.com/nazeeh111/ReplaySmith/releases/tag/v0.1.1); that release and its benchmark packet are separate artifacts.
@@ -61,7 +72,7 @@ A checked outcome does **not** establish which target received an action. Target
 
 Marked or detected sensitive steps require permission and an exact recorded selector, and do not use recovery. Sensitive detection is an aid, not a complete classifier. Origin lists constrain navigation, not every page resource or network request. Workflows are executable instructions: inspect them before running them.
 
-The studio cancels pending runs when their request disconnects or the server closes. Already dispatched actions may have occurred; cancellation is not a rollback or an atomic target-identity guarantee.
+Choose **Cancel run** to stop a pending Studio request while keeping the workflow. The studio also cancels pending runs when their request disconnects or the server closes. Already dispatched actions may have occurred; cancellation is not a rollback or an atomic target-identity guarantee.
 
 ## Verification and technical detail
 

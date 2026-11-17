@@ -1,0 +1,89 @@
+{
+  "origin": "http://127.0.0.1:54097",
+  "source": "b61be80b3bb35c7c126345516ef41c67f2a54d29",
+  "cases": {
+    "changed": {
+      "native": {
+        "status": "abstained",
+        "verified": false,
+        "observation": "changed",
+        "receipt": "passed",
+        "effects": {
+          "first": 1,
+          "later": 0
+        }
+      },
+      "exports": [
+        {
+          "file": "changed-playwright.mjs",
+          "exit": 2,
+          "status": "abstained",
+          "verified": false,
+          "effects": {
+            "first": 2,
+            "later": 0
+          }
+        },
+        {
+          "file": "changed-skill/scripts/run.mjs",
+          "exit": 2,
+          "status": "abstained",
+          "verified": false,
+          "effects": {
+            "first": 3,
+            "later": 0
+          }
+        }
+      ]
+    },
+    "matched": {
+      "native": {
+        "status": "passed",
+        "verified": true,
+        "observation": "matched",
+        "receipt": "passed",
+        "effects": {
+          "first": 1,
+          "later": 1
+        }
+      },
+      "exports": [
+        {
+          "file": "matched-playwright.mjs",
+          "exit": 0,
+          "status": "passed",
+          "verified": true,
+          "effects": {
+            "first": 2,
+            "later": 2
+          }
+        },
+        {
+          "file": "matched-skill/scripts/run.mjs",
+          "exit": 0,
+          "status": "passed",
+          "verified": true,
+          "effects": {
+            "first": 3,
+            "later": 3
+          }
+        }
+      ]
+    }
+  },
+  "browser": {
+    "width": 375,
+    "scrollWidth": 375,
+    "status": "Abstained",
+    "effectCounts": {
+      "changed": {
+        "first": 4,
+        "later": 0
+      },
+      "matched": {
+        "first": 3,
+        "later": 3
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "workflow": "changed continuation witness",
+  "status": "abstained",
+  "verified": false,
+  "durationMs": 158,
+  "steps": [
+    {
+      "id": "open",
+      "action": "navigate",
+      "status": "passed",
+      "durationMs": 23
+    },
+    {
+      "id": "first",
+      "action": "click",
+      "status": "passed",
+      "durationMs": 97,
+      "strategy": "selector",
+      "identityObservation": "changed",
+      "message": "Target evidence changed after dispatch. This may be an expected effect or indicate a wrong action; inspect page state. Outcome checks do not prove target identity."
+    },
+    {
+      "id": "receipt",
+      "action": "assert",
+      "status": "passed",
+      "durationMs": 35,
+      "strategy": "selector"
+    },
+    {
+      "id": "later",
+      "action": "click",
+      "status": "abstained",
+      "durationMs": 0,
+      "message": "An earlier action (first) was dispatched and its target identity was changed; this action was not taken. Inspect page state before continuing."
+    }
+  ]
+}

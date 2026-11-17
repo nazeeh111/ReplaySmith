@@ -1,0 +1,6 @@
+// Replay exact exported files against a fresh owned fixture. Refuses an occupied recorded port.
+import {fixture} from './fixture.mjs';import {readFile} from 'node:fs/promises';import {spawn} from 'node:child_process';import assert from 'node:assert/strict';
+const w=JSON.parse(await readFile(new URL('changed-workflow.json',import.meta.url)));const f=await fixture(Number(new URL(w.allowedOrigins[0]).port));
+try{for(const kind of ['changed','matched']){for(const file of [kind+'-playwright.mjs',kind+'-skill/scripts/run.mjs']){
+ const r=await new Promise(resolve=>{const p=spawn(process.execPath,[new URL(file,import.meta.url).pathname,'--timeout-ms','2500'],{env:process.env});let out='',err='';p.stdout.on('data',c=>out+=c);p.stderr.on('data',c=>err+=c);p.on('close',code=>resolve({code,out,err}));});if(r.err)throw Error(r.err);const report=JSON.parse(r.out);assert.equal(report.status,kind==='changed'?'abstained':'passed');assert.equal(report.verified,kind==='matched');assert.equal(r.code,kind==='changed'?2:0);console.log(JSON.stringify({file,status:report.status,verified:report.verified,effects:f.effects[kind]}));
+ }assert.deepEqual(f.effects[kind],kind==='changed'?{first:2,later:0}:{first:2,later:2});}}finally{await f.close();}

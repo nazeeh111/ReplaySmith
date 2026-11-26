@@ -306,7 +306,7 @@ async function runWorkflow() {
     } else showNotice(`The run could not complete. ${errorMessage(error)}`, 'error');
   } finally {
     activeRun = null; $('cancel-run-button').hidden = true; setBusy(false);
-    $('run-button').focus();
+    (state.view === 'report' && state.report ? $('run-report-title') : $('run-button')).focus();
   }
 }
 function formatDuration(durationMs) { return durationMs >= 1000 ? `${(durationMs / 1000).toFixed(2)}s` : `${Math.round(durationMs)}ms`; }
@@ -332,7 +332,7 @@ function renderReport() {
     }
     list.append(li);
   });
-  content.replaceChildren(node('div', { class: 'report-summary' }, node('div', { class: 'report-title' }, node('p', { class: 'eyebrow', text: 'EXECUTION REPORT' }), node('h2', { text: title }), node('p', { text: `${explanation} Pages can change between a target check and an action. Outcome checks do not prove which target received an action.` })), metrics), list);
+  content.replaceChildren(node('div', { class: 'report-summary' }, node('div', { class: 'report-title' }, node('p', { class: 'eyebrow', text: 'EXECUTION REPORT' }), node('h2', { id: 'run-report-title', tabindex: -1, text: title }), node('p', { text: `${explanation} Pages can change between a target check and an action. Outcome checks do not prove which target received an action.` })), metrics), list);
 }
 async function startRecording(event) {
   event.preventDefault(); if (state.busy) return;

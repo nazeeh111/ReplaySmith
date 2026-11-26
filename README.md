@@ -78,6 +78,14 @@ For another studio port, pass its printed origin to `example --origin`. Import r
 
 [Desktop editor](assets/source-preview/workflow-desktop.png) · [Mobile editor](assets/source-preview/workflow-mobile.png) · [Capture details](assets/source-preview/CAPTURES.md)
 
+## Require a matching first target
+
+Studio enables **Require a matching first target** by default. The first targeted click must match a supported button or checkbox by its unique recorded ID and evidence. ReplaySmith checks and activates the same DOM element in one browser operation. The click is synthetic and untrusted. Unsupported first actions stop before input dispatch.
+
+The bundled dispatch example starts with **Fill**. To run it, uncheck **Require a matching first target** in the Workflow tab for that run. Studio restores the checked setting for the next run. Choose native input for workflows that need typing, keyboard events, or trusted pointer input. The setting applies to the first targeted action. Navigation and later actions follow the workflow.
+
+The CLI and newly generated scripts use native input by default. Add `--require-first-target-identity` to request this check. [Supported controls and workflow examples](docs/workflows.md#bind-dom-activation-to-recorded-evidence)
+
 ## What the checks mean
 
 A checked outcome does **not** establish which target received an action. Target checks and native browser dispatch are separate operations; a page can change between them. Changed or unobservable evidence after an action stops the next action for inspection, while read-only outcome checks may continue.

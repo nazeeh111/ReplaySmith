@@ -35,6 +35,8 @@ const saveSource = async (change: (workflow: Workflow) => void) => {
   await page.getByRole('tab', { name: 'Workflow', exact: false }).click();
 };
 const run = async (name: string) => {
+  await page.getByRole('tab', { name: 'Workflow', exact: false }).click();
+  await page.getByRole('checkbox', { name: 'Require a matching first target' }).uncheck();
   const response = page.waitForResponse(response => response.url() === `${studio.origin}/api/run` && response.request().method() === 'POST', { timeout: 90_000 });
   await page.getByRole('button', { name: 'Run workflow', exact: false }).click();
   const result = await (await response).json() as RunResult;

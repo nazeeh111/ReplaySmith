@@ -2,20 +2,32 @@
 
 **Record a browser task. Replay it with a checked outcome.**
 
-Build an editable workflow from a demonstration or Chrome DevTools Recorder file. Change its inputs, inspect target recovery, check the result, then export the same behavior as Playwright code or an Agent Skill. Runs locally with Chromium, without a model or API key.
+Turn a browser demonstration or Chrome Recorder file into an editable workflow. Replay it locally in Chromium, check the outcome, and export Playwright code or an Agent Skill.
 
-![ReplaySmith studio with the recorded dispatch workflow, target evidence and editable run input](assets/source-preview/workflow-desktop.png)
+[Run the local Studio](#try-the-source-preview) · [Replay the receipt case](#replay-the-receipt-case)
 
-## A receipt passes. The next action waits.
+## The receipt passed. Next was withheld.
 
-In the [owned continuation witness](docs/presentation/README.md), clicking **Pause** changes its target evidence and produces a **Done** receipt. The read-only receipt check passes, but ReplaySmith withholds **Next**. The matched control continues. The first effect already happened in both cases. This is a boundary demonstration, not a success rate or proof of identity at dispatch.
+On the owned loopback fixture, **Pause** produced **Done**. The receipt passed. The button’s target evidence had changed after dispatch, so ReplaySmith withheld **Next**.
 
 <picture>
-  <source media="(max-width: 600px)" srcset="docs/presentation/continuation-mobile.png">
-  <img src="docs/presentation/continuation.png" alt="Two native runs: changed target evidence has first/later effects 1/0 and abstains despite a passed receipt; the matched control has effects 1/1 and passes.">
+  <source media="(max-width: 600px)" srcset="docs/presentation/receipt-phone.png">
+  <img src="docs/presentation/continuation.png" alt="The changed-target run marks the Done receipt passed and the next action abstained after target evidence changed.">
 </picture>
 
-[Reports and fixture](docs/presentation/README.md) · [Portable worked bundle](docs/presentation/worked-example.zip) · [Actual Studio report](docs/presentation/studio-desktop.png) · [Phone report](docs/presentation/studio-phone.png)
+In the matched control, the receipt passed and Next ran. Inspect the page and report before retrying a stopped action. The phone image is cropped from an actual Studio run. Neither run measures a success rate or proves which element received the action. [Changed report](docs/presentation/changed-report.json) · [Matched report](docs/presentation/matched-report.json)
+
+## Replay the receipt case
+
+From a source checkout with Node.js 22 or later, run:
+
+```sh
+npm ci
+npx playwright install chromium
+node docs/presentation/replay.mjs
+```
+
+The script starts the owned loopback fixture and replays the saved Playwright and Agent Skill exports. The changed case reports **abstained** with no Next effect. The matched case reports **passed** with the Next effect. [Evidence and fixture](docs/presentation/README.md) · [Reopenable bundle](docs/presentation/worked-example.zip)
 
 ## Try the source preview
 
@@ -31,7 +43,7 @@ npx playwright install chromium
 npm run studio
 ```
 
-Open the printed loopback URL. The built-in example opens a real local form: change the **note** input and choose **Run workflow**. The report distinguishes completed actions from a verified outcome. On Linux, use Playwright's `--with-deps` browser installation option if it reports missing system libraries.
+Open the printed loopback URL. The built-in example opens a real local form: change the **note** input and choose **Run workflow**. Focus moves to the execution report when it opens. On Linux, use Playwright's `--with-deps` browser installation option if it reports missing system libraries.
 
 ## Demonstration to reusable workflow
 
@@ -64,7 +76,7 @@ For another studio port, pass its printed origin to `example --origin`. Import r
 
 ![Actual four-step run report with the outcome verified and target-identity limitation visible](assets/source-preview/run-report.png)
 
-[Mobile editor](assets/source-preview/workflow-mobile.png) · [Capture details](assets/source-preview/CAPTURES.md)
+[Desktop editor](assets/source-preview/workflow-desktop.png) · [Mobile editor](assets/source-preview/workflow-mobile.png) · [Capture details](assets/source-preview/CAPTURES.md)
 
 ## What the checks mean
 

@@ -38,6 +38,8 @@ test('Studio cancels a pending run by keyboard without losing its workflow, then
     assert.equal(await page.locator('#run-button').isEnabled(),true);
     await new Promise(resolve=>setTimeout(resolve,250));release();await new Promise(resolve=>setTimeout(resolve,150));assert.equal(effects,0);
     if(process.env.REPLAYSMITH_REVIEW_SHOTS){await page.screenshot({path:process.env.REPLAYSMITH_REVIEW_SHOTS+'/cancelled-desktop.png',fullPage:true});await page.setViewportSize({width:375,height:812});await page.screenshot({path:process.env.REPLAYSMITH_REVIEW_SHOTS+'/cancelled-phone.png',fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
-    await apply({...workflow,steps:workflow.steps.filter(s=>s.id!=='wait')});await page.locator('#run-button').click();await page.getByRole('heading',{name:'The outcome checks passed.',exact:true}).waitFor();assert.equal(effects,1);assert.deepEqual(errors,[]);
+    await apply({...workflow,steps:workflow.steps.filter(s=>s.id!=='wait')});await page.locator('#run-button').click();await page.getByRole('heading',{name:'The outcome checks passed.',exact:true}).waitFor();
+    assert.equal(await page.locator(':focus').getAttribute('id'), 'run-report-title');
+    assert.equal(effects,1);assert.deepEqual(errors,[]);
   }finally{await browser.close();release();await studio.close();fixture.closeAllConnections();await new Promise<void>(resolve=>fixture.close(()=>resolve()));}
 });

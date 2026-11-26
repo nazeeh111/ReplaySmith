@@ -48,6 +48,9 @@ export async function startStudio(port=3333):Promise<StudioServer> {
           case '/api/run': {
             if(busy){send(409,{error:'A browser task is already running. Finish it before starting another.'});return;}
             const workflow=validateWorkflow(body.workflow);
+            if (body.requireFirstTargetIdentity !== undefined && typeof body.requireFirstTargetIdentity !== 'boolean') {
+              throw new Error('requireFirstTargetIdentity must be a boolean.');
+            }
             const inputs:Record<string,string>={};
             if(body.inputs!==undefined) {
               if(!body.inputs||typeof body.inputs!=='object'||Array.isArray(body.inputs))throw new Error('Inputs must be an object.');
@@ -60,7 +63,7 @@ export async function startStudio(port=3333):Promise<StudioServer> {
             controller.signal.addEventListener('abort',abort,{once:true});
             res.on('close',disconnected);
             if(controller.signal.aborted||res.destroyed)abort();
-            try{send(200,await runWorkflow(workflow,{inputs,allowSensitive:body.allowSensitive===true,headless:true,timeoutMs:5000,signal:run.signal}));}
+            try{send(200,await runWorkflow(workflow,{inputs,allowSensitive:body.allowSensitive===true,requireFirstTargetIdentity:body.requireFirstTargetIdentity===true,headless:true,timeoutMs:5000,signal:run.signal}));}
             finally{res.removeListener('close',disconnected);controller.signal.removeEventListener('abort',abort);busy=false;}
             return;
           }

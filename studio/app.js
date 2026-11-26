@@ -51,7 +51,7 @@ function setBusy(busy, message) {
     if (control) control.disabled = busy || (!state.workflow && ['run-button', 'export-button', 'add-assertion-button', 'apply-source-button', 'download-json-button', 'save-origins-button'].includes(id));
   }
   $('workflow-name').disabled = busy || !state.workflow;
-  $('allow-sensitive').disabled = busy;
+  for (const id of ['allow-sensitive', 'require-first-target-identity']) $(id).disabled = busy;
   $('source-editor').disabled = busy || !state.workflow;
   $('origins-editor').disabled = busy || !state.workflow;
   $('run-button').replaceChildren(node('span', { 'aria-hidden': 'true', text: busy ? '◌' : '▶', class: busy ? 'running-pulse' : '' }), busy ? 'Working…' : 'Run workflow');
@@ -282,6 +282,7 @@ async function runWorkflow() {
   if (state.dirty && !await saveStep()) return;
   if (state.sourceDirty && !await applySource()) return;
   const controller = new AbortController();
+  const requireFirstTargetIdentity = $('require-first-target-identity').checked;
   activeRun = controller;
   $('cancel-run-button').hidden = false;
   $('cancel-run-button').disabled = false;
@@ -289,14 +290,14 @@ async function runWorkflow() {
   $('workflow-status').className = 'status-badge running'; $('workflow-status').textContent = 'Running';
   $('notice').hidden = true;
   try {
-    const data = await request('/api/run', { workflow: state.workflow, inputs: state.inputs, allowSensitive: $('allow-sensitive').checked }, controller.signal);
+    const data = await request('/api/run', { workflow: state.workflow, inputs: state.inputs, allowSensitive: $('allow-sensitive').checked, requireFirstTargetIdentity }, controller.signal);
     if (controller.signal.aborted) return;
     state.report = data.result || data;
     $('report-indicator').hidden = false;
     $('workflow-status').className = `status-badge ${state.report.status}`;
     $('workflow-status').textContent = state.report.status === 'passed' && state.report.verified ? 'Outcome verified' : statusNames[state.report.status] || state.report.status;
     $('footer-state').textContent = state.report.verified ? 'Run complete · outcome verified' : `Run complete · ${state.report.status}${state.report.status === 'passed' ? ' · no outcome checks' : ''}`;
-    renderSteps(); renderReport(); switchView('report');
+    renderSteps(); renderReport(requireFirstTargetIdentity); switchView('report');
   } catch (error) {
     markUnrun(); renderSteps(); renderReport();
     if (controller.signal.aborted) {
@@ -305,12 +306,14 @@ async function runWorkflow() {
       showNotice('Run cancelled. Earlier actions may already have occurred. Cancellation is not rollback. Inspect page state before retrying.');
     } else showNotice(`The run could not complete. ${errorMessage(error)}`, 'error');
   } finally {
-    activeRun = null; $('cancel-run-button').hidden = true; setBusy(false);
+    activeRun = null; $('cancel-run-button').hidden = true;
+    $('require-first-target-identity').checked = true;
+    setBusy(false);
     (state.view === 'report' && state.report ? $('run-report-title') : $('run-button')).focus();
   }
 }
 function formatDuration(durationMs) { return durationMs >= 1000 ? `${(durationMs / 1000).toFixed(2)}s` : `${Math.round(durationMs)}ms`; }
-function renderReport() {
+function renderReport(requireFirstTargetIdentity = false) {
   const result = state.report;
   const content = $('report-content');
   if (!result) { content.replaceChildren(node('div', { class: 'panel-empty' }, node('span', { class: 'empty-symbol', 'aria-hidden': 'true', text: '✓' }), node('h2', { text: 'Evidence after execution.' }), node('p', { text: 'Run your workflow to see what passed, what recovered, and where ReplaySmith stopped.' }))); return; }
@@ -318,6 +321,8 @@ function renderReport() {
   const passed = result.steps.filter((step) => ['passed', 'recovered'].includes(step.status)).length;
   const title = result.status === 'passed' ? result.verified ? 'The outcome checks passed.' : 'Steps passed. Outcome unverified.' : result.status === 'abstained' ? 'Stopped before an uncertain action.' : 'A step needs your attention.';
   const explanation = result.status === 'passed' ? result.verified ? 'Every executed step completed and the workflow’s explicit checks succeeded.' : 'Add an outcome check to confirm that these actions achieved the intended result.' : result.status === 'abstained' ? 'Earlier actions may already have occurred. Inspect page state and review the evidence before retrying.' : 'Inspect the first failed step, update the workflow, and run it again.';
+  const firstTarget = state.workflow.steps.find(step => step.action !== 'navigate' && step.action !== 'assert');
+  const stoppedAtFirstTarget = requireFirstTargetIdentity && result.status === 'abstained' && result.steps.at(-1)?.id === firstTarget?.id;
   const metrics = node('div', { class: 'report-metrics' }, ...[[`${passed}/${state.workflow.steps.length}`, 'Steps passed'], [String(recovered), 'Recovered'], [formatDuration(result.durationMs), 'Total time']].map(([value, label]) => node('div', { class: 'metric' }, node('strong', { text: value }), node('span', { text: label }))));
   const list = node('ol', { class: 'report-step-list' });
   result.steps.forEach((item, index) => {
@@ -332,7 +337,7 @@ function renderReport() {
     }
     list.append(li);
   });
-  content.replaceChildren(node('div', { class: 'report-summary' }, node('div', { class: 'report-title' }, node('p', { class: 'eyebrow', text: 'EXECUTION REPORT' }), node('h2', { id: 'run-report-title', tabindex: -1, text: title }), node('p', { text: `${explanation} Pages can change between a target check and an action. Outcome checks do not prove which target received an action.` })), metrics), list);
+  content.replaceChildren(node('div', { class: 'report-summary' }, node('div', { class: 'report-title' }, node('p', { class: 'eyebrow', text: 'EXECUTION REPORT' }), node('h2', { id: 'run-report-title', tabindex: -1, text: title }), node('p', { text: `${explanation} Pages can change between a target check and a native action. Outcome checks do not prove which target received an action.` }), stoppedAtFirstTarget ? node('p', { text: 'Check the first target and its evidence. If the workflow requires native input, return to Workflow and uncheck Require a matching first target for this run.' }) : null), metrics), list);
 }
 async function startRecording(event) {
   event.preventDefault(); if (state.busy) return;
@@ -412,7 +417,9 @@ $('apply-source-button').addEventListener('click', applySource);
 $('source-editor').addEventListener('input', () => { state.sourceDirty = true; $('apply-source-button').textContent = 'Validate & apply •'; });
 $('save-origins-button').addEventListener('click', saveOrigins);
 $('workflow-name').addEventListener('change', () => { if (!state.workflow) return; const name = $('workflow-name').value.trim(); if (!name) { $('workflow-name').value = state.workflow.name; return; } state.workflow.name = name; markUnrun(); $('source-editor').value = JSON.stringify(state.workflow, null, 2); document.title = `${name} · ReplaySmith`; renderSteps(); renderReport(); });
-$('allow-sensitive').addEventListener('change', () => { if (state.report) { markUnrun(); renderSteps(); renderReport(); } });
+for (const id of ['allow-sensitive', 'require-first-target-identity']) {
+  $(id).addEventListener('change', () => { if (state.report) { markUnrun(); renderSteps(); renderReport(); } });
+}
 for (const button of document.querySelectorAll('.dialog-close')) button.addEventListener('click', () => button.closest('dialog').close());
 for (const dialog of document.querySelectorAll('dialog')) dialog.addEventListener('click', (event) => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
 for (const tab of document.querySelectorAll('.view-tab')) {

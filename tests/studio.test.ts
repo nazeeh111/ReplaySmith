@@ -24,12 +24,45 @@ test('studio imports, edits, verifies, exports and handles invalid source throug
     await page.getByLabel('note', { exact: true }).fill('Send the calibration kit to Avery.');
     if (capture) await page.screenshot({ path: 'assets/studio.png', fullPage: true });
 
+    const firstTarget = page.getByRole('checkbox', { name: 'Require a matching first target' });
+    const run = page.getByRole('button', { name: 'Run workflow', exact: false });
+    assert.equal(await firstTarget.isChecked(), true);
+    const strictResponse = page.waitForResponse(r => r.url() === `${studio.origin}/api/run` && r.request().method() === 'POST');
+    await run.click();
+    const strict = await strictResponse;
+    assert.equal(strict.request().postDataJSON().requireFirstTargetIdentity, true);
+    const refusal = await strict.json();
+    assert.equal(refusal.status, 'abstained');
+    assert.equal(refusal.verified, false);
+    assert.deepEqual(refusal.steps.map(step => step.id), ['open', 'note']);
+    await page.getByText('Native input was refused.', { exact: false }).waitFor();
+    await page.getByText('Check the first target and its evidence.', { exact: false }).waitFor();
+
+    await page.getByRole('tab', { name: 'Workflow', exact: false }).click();
+    await firstTarget.uncheck();
+    const nativeResponse = page.waitForResponse(r => r.url() === `${studio.origin}/api/run` && r.request().method() === 'POST');
     // A changed input must reach the real browser and its explicit receipt assertion.
     await page.getByRole('button', { name: 'Run workflow', exact: false }).click();
     await page.getByRole('heading', { name: 'The outcome checks passed.', exact: true }).waitFor();
     assert.equal(await page.locator('#workflow-status').textContent(), 'Outcome verified');
     assert.equal(await page.locator('.report-step').count(), 4);
     assert.equal(await page.locator('.result-tag').filter({ hasText: 'Passed' }).count(), 4);
+    assert.equal((await nativeResponse).request().postDataJSON().requireFirstTargetIdentity, false);
+    await page.getByRole('tab', { name: 'Workflow', exact: false }).click();
+    assert.equal(await firstTarget.isChecked(), true);
+
+    // A button-first workflow uses the checked mode and reaches the application outcome.
+    await page.getByRole('tab', { name: 'Source', exact: false }).click();
+    const source = page.getByLabel('Workflow JSON source', { exact: true });
+    const buttonFirst = JSON.parse(await source.inputValue());
+    buttonFirst.steps = buttonFirst.steps.filter(step => step.id !== 'note');
+    buttonFirst.steps.find(step => step.id === 'verify').assertion.value = 'Draft saved:';
+    await source.fill(JSON.stringify(buttonFirst));
+    await page.getByRole('button', { name: 'Validate & apply', exact: false }).click();
+    await page.getByText('Workflow source validated and applied.', { exact: true }).waitFor();
+    await run.click();
+    await page.getByRole('heading', { name: 'The outcome checks passed.', exact: true }).waitFor();
+    await page.getByText('Dispatched a synthetic activation', { exact: false }).waitFor();
 
     // Real Recorder JSON import, with semantic selector alternatives.
     const recording = {
@@ -66,6 +99,7 @@ test('studio imports, edits, verifies, exports and handles invalid source throug
     await page.getByLabel('Description', { exact: true }).last().fill('Confirm the saved dispatch note');
     await page.getByRole('button', { name: 'Add check', exact: true }).click();
     await page.getByRole('button', { name: 'Step 4: Confirm the saved dispatch note', exact: true }).waitFor();
+    await firstTarget.uncheck();
     await page.getByRole('button', { name: 'Run workflow', exact: false }).click();
     await page.getByRole('heading', { name: 'The outcome checks passed.', exact: true }).waitFor();
     assert.equal(await page.locator('#workflow-status').textContent(), 'Outcome verified');

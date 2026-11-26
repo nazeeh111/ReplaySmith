@@ -1,6 +1,6 @@
 import type { Workflow } from './types.js';
 
-const actions = new Set(['navigate', 'click', 'fill', 'select', 'press', 'assert']);
+const actions = new Set(['navigate', 'click', 'activate', 'fill', 'select', 'press', 'assert']);
 const evidenceFields = new Set(['tag', 'role', 'name', 'text', 'label', 'placeholder', 'testId', 'type', 'href', 'context']);
 const inputName = /^[A-Za-z][A-Za-z0-9_]{0,63}$/;
 function fail(message: string): never { throw new Error(`Invalid workflow: ${message}`); }

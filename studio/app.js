@@ -1,8 +1,8 @@
 const $ = (id) => document.getElementById(id);
 const state = { workflow: null, selected: 0, inputs: {}, report: null, busy: false, view: 'workflow', file: '', revision: 0, dirty: false, sourceDirty: false };
 let activeRun = null;
-const actionNames = { navigate: 'Open page', click: 'Click element', fill: 'Fill field', select: 'Select option', press: 'Press key', assert: 'Check outcome' };
-const actionIcons = { navigate: '↗', click: '↖', fill: 'Aa', select: '⌄', press: '⌨', assert: '✓' };
+const actionNames = { navigate: 'Open page', click: 'Click element', activate: 'Activate DOM control', fill: 'Fill field', select: 'Select option', press: 'Press key', assert: 'Check outcome' };
+const actionIcons = { navigate: '↗', click: '↖', activate: '↖', fill: 'Aa', select: '⌄', press: '⌨', assert: '✓' };
 const assertionHasValue = (kind) => ['text', 'value', 'url'].includes(kind);
 const statusNames = { passed: 'Passed', recovered: 'Recovered', abstained: 'Abstained', failed: 'Failed' };
 

@@ -303,13 +303,64 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
       finally { await Promise.allSettled([...checks]); await owner.dispose(); }
     }
   };
+  // Select, compare recorded evidence and activate in one browser task. No
+  // locator retry or native pointer/keyboard dispatch can substitute a receiver.
+  const activateRecordedControl = async (step: Step, dispatched: () => void) => {
+    const target = resolveTarget(step.target!);
+    const recordedIds = [...new Set(target.selectors.filter(selector => /^#[A-Za-z_][A-Za-z0-9_-]*$/.test(selector)))];
+    const [selector] = recordedIds;
+    const { tag, type, name, role } = target.evidence;
+    const button = tag === 'button' && type === 'button' && role === 'button';
+    const checkbox = tag === 'input' && type === 'checkbox' && role === 'checkbox';
+    if (recordedIds.length !== 1 ||
+        !(button || checkbox) || !name?.trim()) return 'Activate requires one simple ID selector and recorded tag, type, role and name for a button or checkbox.';
+    if (step.sensitive || sensitiveWords.test(`${name} ${target.evidence.text ?? ''} ${step.description ?? ''}`))
+      return 'Consequential controls are unsupported by DOM activation.';
+
+    const url = page.url();
+    const expiresAt = Date.now() + remaining();
+    const evaluateActivation = new Function('args', `
+      const { selector, expected, url, expiresAt } = args;
+      if (location.href !== url) return 'Recorded control is outside the current document.';
+      const nodes = document.querySelectorAll(selector);
+      const [el] = nodes;
+      if (nodes.length !== 1) return 'Recorded ID is missing or ambiguous.';
+      const actual = (function(el) {${elementEvidenceScript}
+})(el);
+      if (Object.entries(expected).some(([field, value]) => actual[field] !== value))
+        return 'Recorded target evidence did not match.';
+      if (!el.isConnected)
+        return 'Recorded control is outside the current document.';
+      if (el.matches(':disabled') ||
+          el.closest('[inert],[aria-disabled="true"],[hidden],label') ||
+          el.hasAttribute('is') || el.hasAttribute('command') || el.hasAttribute('commandfor') ||
+          el.hasAttribute('popovertarget') || document.querySelector('dialog:modal') ||
+          !el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }))
+        return 'Recorded control is unavailable or has unsupported activation behavior.';
+      if (${sensitiveWords}.test((actual.name ?? '') + ' ' + (actual.text ?? '') + ' ' + (actual.label ?? '')))
+        return 'Consequential controls are unsupported by DOM activation.';
+      const bounds = el.getBoundingClientRect();
+      const hit = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+      if (!hit || !el.contains(hit))
+        return 'Recorded control is covered or outside the viewport.';
+      if (Date.now() >= expiresAt) return 'DOM activation time budget expired.';
+      HTMLElement.prototype.click.call(el);
+      return null;
+    `) as (args: { selector: string; expected: ElementEvidence; url: string; expiresAt: number }) => string | null;
+    remaining();
+    dispatched();
+    return page.evaluate(evaluateActivation, { selector, expected: target.evidence, url, expiresAt });
+  };
   let finalStatus: RunResult['status'] = 'passed';
+  let firstTargetPending = options.requireFirstTargetIdentity === true;
   // Assertions can describe the resulting page but cannot clear this uncertainty.
   let uncertainAction: { id: string; observation: 'changed' | 'unobservable' } | undefined;
   try {
     for (const step of workflow.steps) {
       const stepStarted = Date.now();
       deadline = performance.now() + timeout;
+      const requireBoundActivation = firstTargetPending && step.action !== 'navigate' && step.action !== 'assert';
+      if (requireBoundActivation) firstTargetPending = false;
       let actionStarted = false;
       let assertionStarted = false;
       let result: StepResult = { id: step.id, action: step.action, status: 'passed', durationMs: 0 };
@@ -326,6 +377,18 @@ export async function portableRuntime(page: Page, workflow: Workflow, options: R
           const actionOptions = browserOptions();
           actionStarted = true;
           await page.goto(url, { waitUntil: 'domcontentloaded', ...actionOptions });
+          remaining();
+          if (!originAllowed(page.url()) || blockedNavigation) throw new Error('origin');
+        } else if (step.action === 'activate' || requireBoundActivation) {
+          const refusal = step.action === 'activate' || step.action === 'click'
+            ? await activateRecordedControl(step, () => { actionStarted = true; })
+            : 'First targeted action requires a supported DOM activation. Native input was refused.';
+          if (refusal) {
+            actionStarted = false;
+            result = { ...result, status: 'abstained', message: `${refusal} No activation dispatched.` };
+          } else {
+            result = { ...result, strategy: 'selector', message: 'Dispatched a synthetic activation to the control matching the recorded ID and evidence.' };
+          }
           remaining();
           if (!originAllowed(page.url()) || blockedNavigation) throw new Error('origin');
         } else if (step.action === 'assert' && step.assertion?.kind === 'url') {

@@ -130,3 +130,24 @@ immediately after cancellation cannot establish that it will never change later.
 Native browser actions have pre-dispatch checks, followed by a separate observation of the selected element where available. Completed element actions that reach the observation stage report `identityObservation`: `matched`, `changed`, or `unobservable`. Navigation steps and actions that fail before that stage omit it. Changed evidence is ambiguous: the action itself may have changed the element, or a different action may have occurred. After a changed or unobservable observation, read-only assertions may run, but the next action is stopped before dispatch with an abstained result. A passing assertion does not clear the uncertainty. Inspect page state before retrying; the earlier action already occurred. If no later action is requested, final outcome checks can still pass, but they do not prove target identity. Navigation or detachment may make the element unobservable.
 
 These observations are not atomic with dispatch and cannot guarantee the target or undo an effect. `verified` means the workflow's explicit outcome assertions passed; it does not verify target identity. Generated standalone and Agent Skill exports use the same runtime and limits. A known native action race can produce a wrong effect between the precheck and dispatch.
+
+### Bind DOM activation to recorded evidence
+
+For a page you control, use `"action": "activate"` in the workflow JSON when the app supports a synthetic click. The target needs one simple ID selector. Other recorded selector alternatives are ignored. Preserve the recorded tag, type, role and name and any other evidence. For example:
+
+```json
+{
+  "id": "open-preview",
+  "action": "activate",
+  "target": {
+    "selectors": ["#preview"],
+    "evidence": { "tag": "button", "type": "button", "role": "button", "name": "Preview" }
+  }
+}
+```
+
+The browser checks that the ID is unique and that every recorded evidence field exactly matches the same element it activates, in one synchronous operation on the top-level document. Supported controls are visible, enabled `button[type=button]` and `input[type=checkbox]` with an unobstructed center in the viewport. The runner abstains on missing, ambiguous, changed, unavailable, unsupported or identified consequential controls. The step never retries through native input or semantic recovery.
+
+Activation directly calls the control's DOM click behavior. It emits an untrusted click and supplies no pointer sequence, keyboard input, focus change or browser user activation. Use the native actions when the page depends on those behaviors. The binding assumes ordinary page DOM behavior and distinguishes controls by the evidence the recording contains. It cannot distinguish a replacement with identical evidence or establish what handlers do with the event. Outcome assertions remain necessary. CLI, Studio and standalone exports share the implementation.
+
+For an existing recording, `replaysmith run task.json --require-first-target-identity` checks the first targeted action without editing the workflow. It uses DOM activation for a qualifying first `click` or `activate`, and abstains on unsupported input before it can dispatch. The first-target option leaves navigation, assertions and later actions under their recorded rules. Use `requireFirstTargetIdentity: true` in the Node runner or the same CLI flag when running a newly generated standalone script. Use this option only for apps that support synthetic clicks.

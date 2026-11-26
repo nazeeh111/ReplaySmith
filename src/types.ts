@@ -22,7 +22,7 @@ export interface Assertion {
 }
 export interface Step {
   id: string;
-  action: 'navigate' | 'click' | 'fill' | 'select' | 'press' | 'assert';
+  action: 'navigate' | 'click' | 'activate' | 'fill' | 'select' | 'press' | 'assert';
   description?: string;
   url?: string;
   target?: Target;
@@ -68,6 +68,8 @@ export interface RunOptions {
   inputs?: Record<string,string>;
   headless?: boolean;
   allowSensitive?: boolean;
+  /** Require DOM activation for the first targeted action, or abstain. */
+  requireFirstTargetIdentity?: boolean;
   timeoutMs?: number;
   /** Cancel pending resolution or a browser action without closing the caller's page. */
   signal?: AbortSignal;

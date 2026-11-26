@@ -24,6 +24,7 @@ const HELP=`
   replaysmith parameterize <task.json> --step <id> --name <input> -o new.json
   replaysmith run <task.json> [--input key=value] [--report run.json]
                               [--headed] [--allow-sensitive] [--no-recovery] [--inputs-stdin] [--timeout-ms 15000]
+                              [--require-first-target-identity]
   replaysmith export <task.json> --format playwright -o workflow.mjs
   replaysmith export <task.json> --format skill -o ./my-skill
   replaysmith example -o task.json [--origin http://127.0.0.1:3333]
@@ -36,7 +37,7 @@ const HELP=`
   Output paths must be new; existing files are never silently overwritten.
 `;
 const valueOptions=new Set(['out','o','port','step','name','format','input','report','origin','timeout-ms']);
-const flagOptions=new Set(['headed','allow-sensitive','no-recovery','inputs-stdin','help','version']);
+const flagOptions=new Set(['headed','allow-sensitive','require-first-target-identity','no-recovery','inputs-stdin','help','version']);
 function parse(args:string[]) {
   const positional:string[]=[];const values:Record<string,string[]>={};const flags=new Set<string>();
   for(let i=0;i<args.length;i++) {
@@ -78,7 +79,7 @@ export async function main(args=process.argv.slice(2)):Promise<number> {
       // Secret values can be supplied through stdin JSON to avoid shell history/process arguments.
       if(options.flags.has('inputs-stdin')){let bytes='';for await(const chunk of process.stdin){bytes+=chunk;if(bytes.length>65536)throw new Error('stdin input exceeds 64 KiB.');}if(bytes.trim()){const object=JSON.parse(bytes);if(!object||typeof object!=='object'||Array.isArray(object))throw new Error('stdin must contain an input object.');for(const [key,value]of Object.entries(object)){if(typeof value!=='string')throw new Error('stdin inputs must be strings.');inputs[key]=value;}}}
       const report=options.value('report');if(report)await absent(resolve(report));
-      const result=await runWorkflow(workflow,{inputs,headless:!options.flags.has('headed'),allowSensitive:options.flags.has('allow-sensitive'),recovery:!options.flags.has('no-recovery'),timeoutMs});
+      const result=await runWorkflow(workflow,{inputs,headless:!options.flags.has('headed'),allowSensitive:options.flags.has('allow-sensitive'),requireFirstTargetIdentity:options.flags.has('require-first-target-identity'),recovery:!options.flags.has('no-recovery'),timeoutMs});
       console.log(JSON.stringify(result,null,2));if(report)await writeNew(report,JSON.stringify(result,null,2)+'\n');
       return result.status==='passed'&&result.verified?0:result.status==='failed'?1:2;
     }

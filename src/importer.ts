@@ -42,12 +42,13 @@ export function importRecording(value: unknown): Workflow {
   const inputs: Workflow['inputs'] = {};
   let secretCount = 0;
   let focusedTarget: Target | undefined;
-  let pressedKey: string | undefined;
-  for (const [index, raw] of value.steps.entries()) {
+  for (let index = 0; index < value.steps.length; index++) {
+    const raw = value.steps[index];
     if (!record(raw) || typeof raw.type !== 'string') throw new Error(`Recording step ${index + 1}: missing type`);
     if (raw.frame !== undefined && (!Array.isArray(raw.frame) || raw.frame.length > 0)) throw new Error(`Recording step ${index + 1}: frames are not supported`);
     if (raw.target !== undefined && raw.target !== 'main') throw new Error(`Recording step ${index + 1}: popup/secondary targets are not supported`);
     if (raw.assertedEvents !== undefined && !Array.isArray(raw.assertedEvents)) throw new Error(`Recording step ${index + 1}: assertedEvents must be an array`);
+    const assertionRecords = [{ raw, index }];
     const id = `step-${steps.length + 1}`;
     switch (raw.type) {
       case 'setViewport': break; // Viewport is presentation state, not a browser action.
@@ -80,21 +81,28 @@ export function importRecording(value: unknown): Workflow {
         if (typeof raw.key !== 'string' || ['Shift', 'Control', 'Alt', 'Meta'].includes(raw.key)) throw new Error(`Recording step ${index + 1}: modifier-key sequences are unsupported`);
         const aim = raw.selectors !== undefined ? target(raw, index) : focusedTarget;
         if (!aim) throw new Error(`Recording step ${index + 1}: a key press needs a preceding focused target`);
-        pressedKey = raw.key;
+        if (index + 1 === value.steps.length) throw new Error(`Recording step ${index + 1}: unfinished keyDown; an adjacent matching keyUp is required`);
+        const release = value.steps[index + 1];
+        if (!record(release) || release.type !== 'keyUp') throw new Error(`Recording step ${index + 2}: keyDown must be followed immediately by a matching keyUp; held or nested gestures are unsupported`);
+        if (release.key !== raw.key) throw new Error(`Recording step ${index + 2}: unmatched keyUp is unsupported`);
+        if (release.frame !== undefined && (!Array.isArray(release.frame) || release.frame.length > 0)) throw new Error(`Recording step ${index + 2}: frames are not supported`);
+        if (release.target !== undefined && release.target !== 'main') throw new Error(`Recording step ${index + 2}: popup/secondary targets are not supported`);
+        if (release.assertedEvents !== undefined && !Array.isArray(release.assertedEvents)) throw new Error(`Recording step ${index + 2}: assertedEvents must be an array`);
         steps.push({ id, action: 'press', target: aim, key: raw.key });
+        focusedTarget = raw.key === 'Tab' ? undefined : aim;
+        assertionRecords.push({ raw: release, index: ++index });
         break;
       }
       case 'keyUp': {
-        if (raw.key !== pressedKey || !pressedKey) throw new Error(`Recording step ${index + 1}: unmatched keyUp is unsupported`);
-        pressedKey = undefined;
-        break; // A press already releases its key.
+        throw new Error(`Recording step ${index + 1}: unmatched keyUp is unsupported`);
       }
       default: throw new Error(`Recording step ${index + 1}: unsupported action "${raw.type}"; no steps were silently dropped`);
     }
-    if (Array.isArray(raw.assertedEvents)) for (const event of raw.assertedEvents) {
+    for (const { raw, index } of assertionRecords) if (Array.isArray(raw.assertedEvents)) for (const event of raw.assertedEvents) {
       if (!record(event) || event.type !== 'navigation' || typeof event.url !== 'string') throw new Error(`Recording step ${index + 1}: unsupported asserted event`);
       origins.add(new URL(event.url).origin);
       steps.push({ id: `step-${steps.length + 1}`, action: 'assert', assertion: navigationAssertion(event.url) });
+      focusedTarget = undefined;
     }
   }
   return validateWorkflow({ version: 1, name: typeof value.title === 'string' ? value.title : 'Imported recording', inputs, allowedOrigins: [...origins], steps });
